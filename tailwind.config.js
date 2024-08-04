@@ -73,6 +73,9 @@ module.exports = {
       },
       backgroundImage: {
         "hero-pattern": "url('/img/banner-1.jpg')",
+        "ad-bg": "url('/img/ad_bg.jpg')",
+        "shape-4": "url('/img/shape-4.png')",
+        "shape-11": "url('/img/shape-11.png')",
       },
       scale: {
         "-1": "-1",

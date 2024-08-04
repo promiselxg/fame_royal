@@ -9,33 +9,34 @@ const Header = () => {
   return (
     <>
       <section>
-        <div
+        {/* <div
           className={cn(
-            `${work_sans.className} w-full flex bg-[--primary-background] text-[--primary-background-text] font-[600] text-[16px]`
+            `${work_sans.className} hidden w-full md:flex bg-[--primary-background] text-[--primary-background-text] font-[600] text-[16px]`
           )}
         >
-          <div className="container mx-auto md:w-[1000px] w-full md:min-h-[60px] flex items-center gap-8">
-            <span>needhelp@info.com</span>
-            <span>33326516493</span>
-            <span>77 broklyn street new york</span>
+          <div className="container mx-auto md:w-[1200px] w-full md:min-h-[60px] flex items-center gap-8">
+            <span>enquiry@fameroyaltravels.com</span>
+            <span>08023788647 | 07065113888 | 08136781136</span>
+            <span>Plot 539 Sunday Adewusi Street, Guzape, Abuja, Nigeria </span>
           </div>
-        </div>
+        </div> */}
         <header className="flex w-full">
-          <div className="conatiner mx-auto min-h-[50px] flex items-center bg-[white] w-[1200px] justify-between">
+          <div className="conatiner mx-auto min-h-[50px] flex items-center bg-[white] w-[90%] md:w-[1200px] justify-between">
             <div className="relative  py-[36px] px-0">
               <figure>
                 <Link href="/">
                   <Image
-                    src="https://travio.smartdemowp.com/wp-content/themes/travio/assets/images/logo-3.png"
+                    src="/img/logo.jpg"
                     alt="logo"
                     width={100}
-                    height={100}
+                    height={50}
+                    className="w-[80px] h-[50px] bg-contain"
                   />
                 </Link>
               </figure>
             </div>
             <div>
-              <ul className="flex gap-5 navigation">
+              <ul className="md:flex gap-5 navigation  hidden">
                 <li>
                   <Link
                     href="/"
@@ -63,7 +64,7 @@ const Header = () => {
                       `${work_sans.className} hover:text-[--light-yellow-text]`
                     )}
                   >
-                    Product
+                    Products
                   </Link>
                 </li>
                 <li>
