@@ -90,22 +90,19 @@ const Footer = () => {
                   <Link href="/about">About us</Link>
                 </li>
                 <li className="transition-all delay-75  hover:text-[--light-yellow-text]">
-                  <Link href="/">Tours</Link>
+                  <Link href="/tour">Tours</Link>
                 </li>
                 <li className="transition-all delay-75  hover:text-[--light-yellow-text]">
-                  <Link href="/">Our Products</Link>
+                  <Link href="/product">Our Products</Link>
                 </li>
                 <li className="transition-all delay-75  hover:text-[--light-yellow-text]">
-                  <Link href="/">Destinations</Link>
+                  <Link href="/gallery">Gallery</Link>
                 </li>
                 <li className="transition-all delay-75  hover:text-[--light-yellow-text]">
-                  <Link href="/">Gallery</Link>
-                </li>
-                <li className="transition-all delay-75  hover:text-[--light-yellow-text]">
-                  <Link href="/">FAQ</Link>
+                  <Link href="/faq">FAQ</Link>
                 </li>
                 <li className="transition-all delay-75 hover:text-[--light-yellow-text]">
-                  <Link href="/">Contact us</Link>
+                  <Link href="/contact">Contact us</Link>
                 </li>
               </ul>
             </div>
