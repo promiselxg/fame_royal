@@ -87,7 +87,7 @@ const Footer = () => {
                 className={cn(`${work_sans.className} flex flex-col gap-y-3`)}
               >
                 <li className="transition-all delay-75  hover:text-[--light-yellow-text]">
-                  <Link href="/">About us</Link>
+                  <Link href="/about">About us</Link>
                 </li>
                 <li className="transition-all delay-75  hover:text-[--light-yellow-text]">
                   <Link href="/">Tours</Link>

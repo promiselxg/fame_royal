@@ -5,105 +5,15 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import { FiClock, FiMapPin } from "react-icons/fi";
+import Hero from "./(home)/_components/header/hero";
+import WhyUs from "./(home)/_components/whyUs";
+import Services from "./(home)/_components/ourServices";
 
 export default function Home() {
   return (
     <main className="flex w-full flex-col">
-      <section id="#" className="w-full">
-        <div className="w-full bg-[#f5f6f6] flex pb-[50px] md:pb-0">
-          <div className="container mx-auto flex justify-center flex-col items-center w-[1200px] pt-[40px] md:pt-[80px] md:pb-[100px] gap-y-8">
-            <h2
-              className={cn(
-                `${playfair.className} font-[900] text-[20px] md:text-[50px]`
-              )}
-            >
-              Why You should Travel with us.
-            </h2>
-            <div className="grid w-full md:grid-cols-4 grid-cols-1 gap-5 ">
-              <div className="bg-[white] min-w-[250px]  boxShadow overflow-hidden rounded-[10px]">
-                <div className="w-full h-[180px]">
-                  <Image
-                    src="https://travio.smartdemowp.com/wp-content/uploads/2021/02/feature-1.jpg"
-                    alt="boy"
-                    width={200}
-                    height={200}
-                    className="bg-cover w-full h-[180px]"
-                  />
-                </div>
-                <div className="p-5 flex justify-center text-center">
-                  <h2
-                    className={cn(
-                      `${work_sans.className} text-[17px] font-[600] leading-tight`
-                    )}
-                  >
-                    2000+ Our Worldwide Guide
-                  </h2>
-                </div>
-              </div>
-              <div className="bg-[white] min-w-[250px]  boxShadow overflow-hidden rounded-[10px]">
-                <div className="w-full h-[180px]">
-                  <Image
-                    src="https://travio.smartdemowp.com/wp-content/uploads/2021/02/feature-2.jpg"
-                    alt="boy"
-                    width={200}
-                    height={200}
-                    className="bg-cover w-full h-[180px]"
-                  />
-                </div>
-                <div className="p-5 flex justify-center text-center">
-                  <h2
-                    className={cn(
-                      `${work_sans.className} text-[17px] font-[600] leading-tight`
-                    )}
-                  >
-                    100% Trusted Tour Agency
-                  </h2>
-                </div>
-              </div>
-              <div className="bg-[white] min-w-[250px]  boxShadow overflow-hidden rounded-[10px]">
-                <div className="w-full h-[180px]">
-                  <Image
-                    src="https://travio.smartdemowp.com/wp-content/uploads/2021/02/feature-3.jpg"
-                    alt="boy"
-                    width={200}
-                    height={200}
-                    className="bg-cover w-full h-[180px]"
-                  />
-                </div>
-                <div className="p-5 flex justify-center text-center">
-                  <h2
-                    className={cn(
-                      `${work_sans.className} text-[17px] font-[600] leading-tight`
-                    )}
-                  >
-                    12+ Years of Travel Experience
-                  </h2>
-                </div>
-              </div>
-              <div className="bg-[white] min-w-[250px]  boxShadow overflow-hidden rounded-[10px]">
-                <div className="w-full h-[180px]">
-                  <Image
-                    src="https://travio.smartdemowp.com/wp-content/uploads/2021/02/feature-4.jpg"
-                    alt="boy"
-                    width={200}
-                    height={200}
-                    className="bg-cover w-full h-[180px]"
-                  />
-                </div>
-                <div className="p-5 flex justify-center text-center">
-                  <h2
-                    className={cn(
-                      `${work_sans.className} text-[17px] font-[600] leading-tight`
-                    )}
-                  >
-                    98% of Our Travelers are Happy
-                  </h2>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <Hero />
+      <WhyUs />
       <section className="md:h-[calc(100vh-200px)] flex items-center">
         <div className="container mx-auto flex w-full md:w-[1000px] gap-8 flex-col md:flex-row">
           <div className="hidden w-1/3 bg-white p-2 boxShadow rounded-[5px] md:flex flex-col justify-center h-fit md:mt-[50px]">
@@ -151,114 +61,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className="flex">
-        <div className="container mx-auto flex justify-center w-[1200px] gap-y-3  flex-col py-[50px]">
-          <h2
-            className={cn(
-              `${playfair.className} font-[900] text-[25px] md:text-[50px] md:justify-center flex leading-tight`
-            )}
-          >
-            Our Services
-          </h2>
-          <p
-            className={cn(
-              `${work_sans.className} text-sm md:justify-center flex md:text-center max-w-[600px] mx-auto`
-            )}
-          >
-            Based on our wide network of professional partners across the world,
-            vast experience, highly trained staff with deep knowledge and high
-            level of expertise in educational tourism, we organize interesting
-            tour package for different global destinations in all the six
-            continents.
-          </p>
-          <div className="grid md:grid-cols-4 grid-cols-1 gap-5 my-8">
-            <div className=" gap-y-2 flex flex-col">
-              <Image
-                src="https://travio.smartdemowp.com/wp-content/uploads/2021/02/feature-3.jpg"
-                width={200}
-                height={200}
-                alt="services"
-                className="w-full bg-cover h-[150px]"
-              />
-              <h2
-                className={cn(
-                  `${work_sans.className} text-[17px] font-[600] uppercase text-[green]`
-                )}
-              >
-                Holiday Packages
-              </h2>
-              <p className={cn(`${work_sans.className} text-sm text-left`)}>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cumque
-                nobis a, repudiandae iusto alias atque aperiam veniam modi
-                perspiciatis doloremque.
-              </p>
-            </div>
-            <div className=" gap-y-2 flex flex-col">
-              <Image
-                src="https://travio.smartdemowp.com/wp-content/uploads/2021/02/feature-3.jpg"
-                width={200}
-                height={200}
-                alt="services"
-                className="w-full bg-cover h-[150px]"
-              />
-              <h2
-                className={cn(
-                  `${work_sans.className} text-[17px] font-[600] uppercase text-[green]`
-                )}
-              >
-                Flight Reservation
-              </h2>
-              <p className={cn(`${work_sans.className} text-sm text-left`)}>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cumque
-                nobis a, repudiandae iusto alias atque aperiam veniam modi
-                perspiciatis doloremque.
-              </p>
-            </div>
-            <div className=" gap-y-2 flex flex-col">
-              <Image
-                src="https://travio.smartdemowp.com/wp-content/uploads/2021/02/feature-3.jpg"
-                width={200}
-                height={200}
-                alt="services"
-                className="w-full bg-cover h-[150px]"
-              />
-              <h2
-                className={cn(
-                  `${work_sans.className} text-[17px] font-[600] uppercase text-[green]`
-                )}
-              >
-                Hotel Reservation
-              </h2>
-              <p className={cn(`${work_sans.className} text-sm text-left`)}>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cumque
-                nobis a, repudiandae iusto alias atque aperiam veniam modi
-                perspiciatis doloremque.
-              </p>
-            </div>
-            <div className=" gap-y-2 flex flex-col">
-              <Image
-                src="https://travio.smartdemowp.com/wp-content/uploads/2021/02/feature-3.jpg"
-                width={200}
-                height={200}
-                alt="services"
-                className="w-full bg-cover h-[150px]"
-              />
-              <h2
-                className={cn(
-                  `${work_sans.className} text-[17px] font-[600] uppercase text-[green]`
-                )}
-              >
-                Vacation Packages
-              </h2>
-              <p className={cn(`${work_sans.className} text-sm text-left`)}>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cumque
-                nobis a, repudiandae iusto alias atque aperiam veniam modi
-                perspiciatis doloremque.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+      <Services />
       <section className="flex md:h-[600px] bg-ad-bg bg-no-repeat bg-center bg-cover relative py-[150px] px-0 items-center">
         <div className="deals-section"></div>
         <div className="container mx-auto z-10">

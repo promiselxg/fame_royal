@@ -7,6 +7,11 @@ const nextConfig = {
         hostname: "travio.smartdemowp.com",
         port: "",
       },
+      {
+        protocol: "https",
+        hostname: "travosy.vercel.app",
+        port: "",
+      },
     ],
   },
 };

@@ -111,7 +111,6 @@ const Header = () => {
           </div>
         </header>
       </section>
-      <Hero />
     </>
   );
 };

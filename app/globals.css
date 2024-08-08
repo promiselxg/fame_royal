@@ -73,6 +73,13 @@
 .zoom-in:hover {
   transform: scale(1.05);
 }
+.paragraph p {
+  color: rgba(0, 0, 0, 0.8);
+  font-size: 0.975rem !important;
+  line-height: 1.55rem;
+  font-family: "Work Sans", sans-serif !important;
+  margin-bottom: 5px;
+}
 @keyframes slide {
   0% {
     background-position: 0 0;

@@ -76,6 +76,7 @@ module.exports = {
         "ad-bg": "url('/img/ad_bg.jpg')",
         "shape-4": "url('/img/shape-4.png')",
         "shape-11": "url('/img/shape-11.png')",
+        "about-us-bg": "url('/img/video-1.jpg')",
       },
       scale: {
         "-1": "-1",

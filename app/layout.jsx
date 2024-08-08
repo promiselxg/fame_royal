@@ -14,6 +14,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={cn(`${playfair.className}`)}>
         <Header />
+
         {children}
         <Footer />
       </body>
