@@ -77,6 +77,8 @@ module.exports = {
         "shape-4": "url('/img/shape-4.png')",
         "shape-11": "url('/img/shape-11.png')",
         "about-us-bg": "url('/img/video-1.jpg')",
+        "tours-bg": "url('/img/tours.jpg')",
+        "tour-bg": "url('/img/tour-bg.jpg')",
       },
       scale: {
         "-1": "-1",

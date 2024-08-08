@@ -49,7 +49,7 @@ const Header = () => {
                 </li>
                 <li>
                   <Link
-                    href="/"
+                    href="/tour"
                     className={cn(
                       `${work_sans.className} hover:text-[--light-yellow-text]`
                     )}
@@ -59,7 +59,7 @@ const Header = () => {
                 </li>
                 <li>
                   <Link
-                    href="/"
+                    href="/product"
                     className={cn(
                       `${work_sans.className} hover:text-[--light-yellow-text]`
                     )}
@@ -69,7 +69,7 @@ const Header = () => {
                 </li>
                 <li>
                   <Link
-                    href="/"
+                    href="/services"
                     className={cn(
                       `${work_sans.className} hover:text-[--light-yellow-text]`
                     )}
@@ -79,7 +79,7 @@ const Header = () => {
                 </li>
                 <li>
                   <Link
-                    href="/"
+                    href="/gallery"
                     className={cn(
                       `${work_sans.className} hover:text-[--light-yellow-text]`
                     )}
@@ -89,7 +89,7 @@ const Header = () => {
                 </li>
                 <li>
                   <Link
-                    href="/"
+                    href="/contact"
                     className={cn(
                       `${work_sans.className} hover:text-[--light-yellow-text]`
                     )}
