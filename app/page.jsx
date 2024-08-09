@@ -4,7 +4,7 @@ import { playfair, work_sans } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
-import { FiClock, FiMapPin } from "react-icons/fi";
+
 import Hero from "./(home)/_components/header/hero";
 import WhyUs from "./(home)/_components/whyUs";
 import Services from "./(home)/_components/ourServices";
@@ -32,14 +32,14 @@ export default function Home() {
                 `${work_sans.className} text-[16px] font-[600] text-[--light-yellow-text]`
               )}
             >
-              About Royal Fames
+              About Fame Royal Travels
             </h2>
             <h2
               className={cn(
                 `${playfair.className} text-[20px] md:text-[45px] font-[900] leading-[1.2]`
               )}
             >
-              Nigeria&apos;s No 1 Travel Agency Company Since 2008.
+              A message from our C.E.O
             </h2>
             <p
               className={cn(
@@ -52,13 +52,15 @@ export default function Home() {
               Dicta facere suscipit veritatis quod quisquam pariatur a est
               perferendis, eos excepturi?
             </p>
-            <Button
-              className={cn(
-                `${work_sans.className} btn-default bg-[--light-yellow-text] hover:bg-[--btn-hover] py-[17.5px] px-[36px] md:h-[55px] w-fit mt-5  `
-              )}
-            >
-              Book a tour
-            </Button>
+            <Link href="/tour">
+              <Button
+                className={cn(
+                  `${work_sans.className} btn-default bg-[--light-yellow-text] hover:bg-[--btn-hover] py-[17.5px] px-[36px] md:h-[55px] w-fit mt-5  `
+                )}
+              >
+                Book a tour
+              </Button>
+            </Link>
           </div>
         </div>
       </section>

@@ -30,7 +30,7 @@ const Header = () => {
                     alt="logo"
                     width={100}
                     height={50}
-                    className="w-[80px] h-[50px] bg-contain"
+                    className="w-[100px] md:w-[80px] h-[70px] md:h-[50px] bg-contain"
                   />
                 </Link>
               </figure>
@@ -99,7 +99,7 @@ const Header = () => {
                 </li>
               </ul>
             </div>
-            <div>
+            <div className="hidden md:flex">
               <Button
                 className={cn(
                   `${work_sans.className} btn-default bg-[--light-yellow-text] hover:bg-[--btn-hover] py-[17.5px] px-[36px] md:h-[55px]`
