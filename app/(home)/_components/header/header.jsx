@@ -35,17 +35,17 @@ const Header = () => {
               </figure>
             </div>
             <div>
-              <ul className="md:flex gap-5 navigation  hidden">
+              <ul className="md:flex gap-3 navigation  hidden">
                 <li>
                   <Link
-                    href="/"
+                    href="/about"
                     className={cn(
                       `${work_sans.className} ${
-                        currentRoute === "/" && "isactive"
+                        currentRoute === "/about" && "isactive"
                       } hover:text-[--light-yellow-text]`
                     )}
                   >
-                    Home
+                    About us
                   </Link>
                 </li>
                 <li>
@@ -163,11 +163,11 @@ const Header = () => {
           >
             <li
               className={`${
-                currentRoute === "/" && "isactive"
+                currentRoute === "/about" && "isactive"
               } hover:text-[--text-hover] transition-all delay-75 text-[18px]`}
             >
-              <Link href="/" onMouseDown={hanldeOpenNav}>
-                Home
+              <Link href="/about" onMouseDown={hanldeOpenNav}>
+                About us
               </Link>
             </li>
             <li
