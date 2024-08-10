@@ -1,12 +1,19 @@
 "use client";
 
-import { playfair, work_sans } from "@/lib/fonts";
+import { work_sans } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import { useEffect } from "react";
 import { PhotoProvider, PhotoView } from "react-photo-view";
 import "react-photo-view/dist/react-photo-view.css";
 
 const Gallery = () => {
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
   return (
     <>
       <section className="flex w-full flex-col">

@@ -1,10 +1,18 @@
+"use client";
 import { playfair, work_sans } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
 import Breadcrumb from "../_components/breadcrumb";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect } from "react";
 
 const ProductsPage = () => {
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
   return (
     <>
       <div className="w-full bg-[whitesmoke]">

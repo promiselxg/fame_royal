@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { playfair, work_sans } from "@/lib/fonts";
@@ -9,14 +10,21 @@ import Hero from "./(home)/_components/header/hero";
 import WhyUs from "./(home)/_components/whyUs";
 import Services from "./(home)/_components/ourServices";
 import Products from "./(home)/_components/products";
+import { useEffect } from "react";
 
 export default function Home() {
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
   return (
     <main className="flex w-full flex-col">
       <Hero />
       <WhyUs />
       <section className="md:h-[calc(100vh-200px)] flex items-center">
-        <div className="container mx-auto flex w-full md:w-[1000px] gap-8 flex-col md:flex-row">
+        <div className="container mx-auto flex w-full md:w-[1000px] gap-8 flex-col md:flex-row justify-center items-center">
           <div className="hidden w-1/3 bg-white p-2 boxShadow rounded-[5px] md:flex flex-col justify-center h-fit md:mt-[50px]">
             <Image
               src="https://travio.smartdemowp.com/wp-content/uploads/2021/02/about-1.jpg"
@@ -39,28 +47,34 @@ export default function Home() {
                 `${playfair.className} text-[20px] md:text-[45px] font-[900] leading-[1.2]`
               )}
             >
-              A message from our C.E.O
+              A message from our C.E.O.
             </h2>
             <p
               className={cn(
                 `${work_sans.className} text-sm md:text-[16px] font-[400] leading-6 text-[rgba(0,0,0,0.9)]`
               )}
             >
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis
-              harum molestias ipsa, dolorum autem quia molestiae facere voluptas
-              itaque. Repellendus cum illo, quos accusamus quod ipsa ab amet.
-              Dicta facere suscipit veritatis quod quisquam pariatur a est
-              perferendis, eos excepturi?
+              I am thrilled to welcome you to our world of exploration and
+              adventure. At Fame royal travels, we believe that travel is not
+              just about visiting new places; its about creating unforgettable
+              memories, forging connections, and boardening horizons. Our team
+              is dedicated to crafting unique experiences tailored to your
+              preferences, ensuring every journey with us is extraordinary.
+              Whether you’re seeking a relaxing beach getaway, an exhilarating
+              expedition, or a cultural immersion, we are here to turn your
+              travel dreams into reality. Thank you for entrusting us with your
+              adventures. We look forward to being a part of your unforgettable
+              journeys.
             </p>
-            <Link href="/tour">
+            {/* <Link href="/tour">
               <Button
                 className={cn(
                   `${work_sans.className} btn-default bg-[--light-yellow-text] hover:bg-[--btn-hover] py-[17.5px] px-[36px] md:h-[55px] w-fit mt-5  `
                 )}
               >
-                Book a tour
+                Read more about us.
               </Button>
-            </Link>
+            </Link> */}
           </div>
         </div>
       </section>
@@ -161,7 +175,7 @@ export default function Home() {
                       `${work_sans.className} text-[whitesmoke] font-[600] text-[20px]`
                     )}
                   >
-                    Canada
+                    Singapore
                   </h1>
                 </div>
               </div>
@@ -183,7 +197,7 @@ export default function Home() {
                       `${work_sans.className} text-[whitesmoke] font-[600] text-[20px]`
                     )}
                   >
-                    United Kingdom
+                    Vietnam
                   </h1>
                 </div>
               </div>
@@ -205,7 +219,7 @@ export default function Home() {
                       `${work_sans.className} text-[whitesmoke] font-[600] text-[20px]`
                     )}
                   >
-                    Ethopia
+                    Dubai
                   </h1>
                 </div>
               </div>
@@ -227,7 +241,7 @@ export default function Home() {
                       `${work_sans.className} text-[whitesmoke] font-[600] text-[20px]`
                     )}
                   >
-                    Italy
+                    UK
                   </h1>
                 </div>
               </div>
@@ -249,7 +263,7 @@ export default function Home() {
                       `${work_sans.className} text-[whitesmoke] font-[600] text-[20px] z-10`
                     )}
                   >
-                    New York city
+                    Spain
                   </h1>
                 </div>
               </div>

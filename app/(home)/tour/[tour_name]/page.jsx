@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import { playfair, work_sans } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
@@ -5,8 +6,15 @@ import Link from "next/link";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { FiCheck, FiX } from "react-icons/fi";
 import Breadcrumb from "../../_components/breadcrumb";
+import { useEffect } from "react";
 
 const ToursDetailsPage = ({ params }) => {
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
   return (
     <>
       <div className="w-full bg-[whitesmoke]">

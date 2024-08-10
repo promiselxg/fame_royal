@@ -1,10 +1,18 @@
+"use client";
 import { playfair, work_sans } from "@/lib/fonts";
 import Breadcrumb from "../../_components/breadcrumb";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { FiMail, FiPhone } from "react-icons/fi";
+import { useEffect } from "react";
 
 const ProductDetails = () => {
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
   return (
     <>
       <div className="w-full">

@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { playfair, work_sans } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import { FiClock, FiMapPin } from "react-icons/fi";
 
@@ -48,10 +49,10 @@ const Products = () => {
                 <div className="w-full flex gap-2 py-2">
                   <span
                     className={cn(
-                      `${playfair.className} text-[17px] font-[900]`
+                      `${work_sans.className} text-[17px] font-[600]`
                     )}
                   >
-                    $150
+                    &#8358;5,000
                   </span>
                   <span>/</span>
                   <span className="text-sm">per person</span>
@@ -74,14 +75,16 @@ const Products = () => {
                     tempor incididunt.
                   </p>
                 </div>
-                <Button
-                  variant="outline"
-                  className={cn(
-                    `${work_sans.className} hover:bg-[--btn-hover] py-[17.5px] px-[36px] md:h-[55px] hover:text-white transition-all delay-75 rounded-[2px]`
-                  )}
-                >
-                  See Details
-                </Button>
+                <Link href="/product/moscow">
+                  <Button
+                    variant="outline"
+                    className={cn(
+                      `${work_sans.className} hover:bg-[--btn-hover] py-[17.5px] px-[36px] md:h-[55px] hover:text-white transition-all delay-75 rounded-[2px]`
+                    )}
+                  >
+                    See Details
+                  </Button>
+                </Link>
                 <div className="pb-8"></div>
               </div>
             </div>
@@ -108,10 +111,10 @@ const Products = () => {
                 <div className="w-full flex gap-2 py-2">
                   <span
                     className={cn(
-                      `${playfair.className} text-[17px] font-[900]`
+                      `${work_sans.className} text-[17px] font-[600]`
                     )}
                   >
-                    $150
+                    &#8358;5,000
                   </span>
                   <span>/</span>
                   <span className="text-sm">per person</span>
@@ -134,14 +137,16 @@ const Products = () => {
                     tempor incididunt.
                   </p>
                 </div>
-                <Button
-                  variant="outline"
-                  className={cn(
-                    `${work_sans.className} hover:bg-[--btn-hover] py-[17.5px] px-[36px] md:h-[55px] hover:text-white transition-all delay-75 rounded-[2px]`
-                  )}
-                >
-                  See Details
-                </Button>
+                <Link href="/product/moscow">
+                  <Button
+                    variant="outline"
+                    className={cn(
+                      `${work_sans.className} hover:bg-[--btn-hover] py-[17.5px] px-[36px] md:h-[55px] hover:text-white transition-all delay-75 rounded-[2px]`
+                    )}
+                  >
+                    See Details
+                  </Button>
+                </Link>
                 <div className="pb-8"></div>
               </div>
             </div>
@@ -168,10 +173,10 @@ const Products = () => {
                 <div className="w-full flex gap-2 py-2">
                   <span
                     className={cn(
-                      `${playfair.className} text-[17px] font-[900]`
+                      `${work_sans.className} text-[17px] font-[600]`
                     )}
                   >
-                    $150
+                    &#8358;5,000
                   </span>
                   <span>/</span>
                   <span className="text-sm">per person</span>
@@ -194,14 +199,16 @@ const Products = () => {
                     tempor incididunt.
                   </p>
                 </div>
-                <Button
-                  variant="outline"
-                  className={cn(
-                    `${work_sans.className} hover:bg-[--btn-hover] py-[17.5px] px-[36px] md:h-[55px] hover:text-white transition-all delay-75 rounded-[2px]`
-                  )}
-                >
-                  See Details
-                </Button>
+                <Link href="/product/moscow">
+                  <Button
+                    variant="outline"
+                    className={cn(
+                      `${work_sans.className} hover:bg-[--btn-hover] py-[17.5px] px-[36px] md:h-[55px] hover:text-white transition-all delay-75 rounded-[2px]`
+                    )}
+                  >
+                    See Details
+                  </Button>
+                </Link>
                 <div className="pb-8"></div>
               </div>
             </div>

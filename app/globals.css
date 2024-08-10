@@ -6,14 +6,14 @@
   :root {
     --primary-background: #14161c;
     --primary-background-text: #fff;
-    --light-yellow-text: #ff7c5b;
+    --light-yellow-text: #ca2723;
     --btn-hover: #061a3a;
   }
 
   .dark {
     --primary-background: #fff;
     --primary-background-text: #14161c;
-    --light-yellow-text: #ff7c5b;
+    --light-yellow-text: #ca2723;
     --btn-hover: #061a3a;
   }
 }
@@ -107,6 +107,12 @@
   text-align: center;
   opacity: 0;
   transition: all 500ms ease;
+}
+.isactive {
+  color: var(--light-yellow-text);
+}
+.navbar {
+  transition: all 0.3s ease-in;
 }
 @keyframes slide {
   0% {

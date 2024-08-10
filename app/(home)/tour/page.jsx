@@ -1,11 +1,20 @@
+"use client";
 import { playfair, work_sans } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { FiMail, FiPhone } from "react-icons/fi";
 import Image from "next/image";
 import Breadcrumb from "../_components/breadcrumb";
+import { useEffect } from "react";
+import Link from "next/link";
 
 const ToursPage = () => {
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
   return (
     <>
       <div className="w-full flex flex-col bg-[whitesmoke]">
@@ -112,14 +121,16 @@ const ToursPage = () => {
                     Lorem ipsum dolor amet consectetur adipiscing sed do eiusmod
                     tempor incididunt.
                   </p>
-                  <Button
-                    variant="outline"
-                    className={cn(
-                      `${work_sans.className} hover:bg-[--btn-hover] py-[17.5px] px-[36px] md:h-[55px] hover:text-white transition-all delay-75 rounded-[2px]`
-                    )}
-                  >
-                    See Details
-                  </Button>
+                  <Link href="/tour/tour-name">
+                    <Button
+                      variant="outline"
+                      className={cn(
+                        `${work_sans.className} hover:bg-[--btn-hover] py-[17.5px] px-[36px] md:h-[55px] hover:text-white transition-all delay-75 rounded-[2px]`
+                      )}
+                    >
+                      See Details
+                    </Button>
+                  </Link>
                 </div>
               </div>
               <div className="w-full boxShadow bg-[white] flex px-5 py-6 gap-8  rounded-[8px] flex-col md:flex-row">
@@ -158,14 +169,16 @@ const ToursPage = () => {
                     Lorem ipsum dolor amet consectetur adipiscing sed do eiusmod
                     tempor incididunt.
                   </p>
-                  <Button
-                    variant="outline"
-                    className={cn(
-                      `${work_sans.className} hover:bg-[--btn-hover] py-[17.5px] px-[36px] md:h-[55px] hover:text-white transition-all delay-75 rounded-[2px]`
-                    )}
-                  >
-                    See Details
-                  </Button>
+                  <Link href="/tour/tour-name">
+                    <Button
+                      variant="outline"
+                      className={cn(
+                        `${work_sans.className} hover:bg-[--btn-hover] py-[17.5px] px-[36px] md:h-[55px] hover:text-white transition-all delay-75 rounded-[2px]`
+                      )}
+                    >
+                      See Details
+                    </Button>
+                  </Link>
                 </div>
               </div>
             </div>

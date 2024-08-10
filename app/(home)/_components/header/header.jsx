@@ -1,11 +1,21 @@
+"use client";
 import { work_sans } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
-import Hero from "./hero";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
+import { GanttChart, X } from "lucide-react";
 
 const Header = () => {
+  const currentRoute = usePathname();
+  const [openNavBar, setOpenNavBar] = useState(false);
+
+  const hanldeOpenNav = () => {
+    setOpenNavBar(!openNavBar);
+  };
+
   return (
     <>
       <section>
@@ -41,7 +51,9 @@ const Header = () => {
                   <Link
                     href="/"
                     className={cn(
-                      `${work_sans.className} hover:text-[--light-yellow-text]`
+                      `${work_sans.className} ${
+                        currentRoute === "/" && "isactive"
+                      } hover:text-[--light-yellow-text]`
                     )}
                   >
                     Home
@@ -51,7 +63,9 @@ const Header = () => {
                   <Link
                     href="/tour"
                     className={cn(
-                      `${work_sans.className} hover:text-[--light-yellow-text]`
+                      `${work_sans.className} ${
+                        currentRoute === "/tour" && "isactive"
+                      } hover:text-[--light-yellow-text]`
                     )}
                   >
                     Tours
@@ -61,7 +75,9 @@ const Header = () => {
                   <Link
                     href="/product"
                     className={cn(
-                      `${work_sans.className} hover:text-[--light-yellow-text]`
+                      `${work_sans.className} ${
+                        currentRoute === "/product" && "isactive"
+                      } hover:text-[--light-yellow-text]`
                     )}
                   >
                     Products
@@ -71,7 +87,9 @@ const Header = () => {
                   <Link
                     href="/services"
                     className={cn(
-                      `${work_sans.className} hover:text-[--light-yellow-text]`
+                      `${work_sans.className} ${
+                        currentRoute === "/services" && "isactive"
+                      } hover:text-[--light-yellow-text]`
                     )}
                   >
                     Services
@@ -81,7 +99,9 @@ const Header = () => {
                   <Link
                     href="/gallery"
                     className={cn(
-                      `${work_sans.className} hover:text-[--light-yellow-text]`
+                      `${work_sans.className} ${
+                        currentRoute === "/gallery" && "isactive"
+                      } hover:text-[--light-yellow-text]`
                     )}
                   >
                     Gallery
@@ -89,15 +109,36 @@ const Header = () => {
                 </li>
                 <li>
                   <Link
+                    href="/faq"
+                    className={cn(
+                      `${work_sans.className} ${
+                        currentRoute === "/faq" && "isactive"
+                      } hover:text-[--light-yellow-text]`
+                    )}
+                  >
+                    FAQ
+                  </Link>
+                </li>
+                <li>
+                  <Link
                     href="/contact"
                     className={cn(
-                      `${work_sans.className} hover:text-[--light-yellow-text]`
+                      `${work_sans.className} ${
+                        currentRoute === "/contact" && "isactive"
+                      } hover:text-[--light-yellow-text]`
                     )}
                   >
                     Contact us
                   </Link>
                 </li>
               </ul>
+              {!openNavBar && (
+                <GanttChart
+                  className="text-[--light-yellow-text] md:hidden cursor-pointer transition-all delay-100 "
+                  size={40}
+                  onClick={hanldeOpenNav}
+                />
+              )}
             </div>
             <div className="hidden md:flex">
               <Button
@@ -111,6 +152,78 @@ const Header = () => {
           </div>
         </header>
       </section>
+      <div
+        className={cn(
+          `${
+            work_sans.className
+          }  fixed bottom-0 top-0 h-screen bg-[--primary-background] z-50  navbar ${
+            openNavBar ? "w-full " : "w-0 overflow-hidden"
+          }`
+        )}
+      >
+        <X
+          className="text-[--light-yellow-text] md:hidden cursor-pointer transition-all delay-100 absolute top-10 right-5"
+          size={45}
+          onClick={hanldeOpenNav}
+        />
+        <div className="h-screen justify-center items-center flex">
+          <ul
+            className={cn(
+              `${work_sans.className} text-white md:flex items-center gap-5 text-sm uppercase space-y-8`
+            )}
+          >
+            <li
+              className={`${
+                currentRoute === "/" && "isactive"
+              } hover:text-[--text-hover] transition-all delay-75 text-[18px]`}
+            >
+              <Link href="/">Home</Link>
+            </li>
+            <li
+              className={`${
+                currentRoute === "/tour" && "isactive"
+              } hover:text-[--text-hover] transition-all delay-75 text-[18px]`}
+            >
+              <Link href="/tour">Tours</Link>
+            </li>
+            <li
+              className={`${
+                currentRoute === "/product" && "isactive"
+              } hover:text-[--text-hover] transition-all delay-75 text-[18px]`}
+            >
+              <Link href="/product">Our Products</Link>
+            </li>
+            <li
+              className={`${
+                currentRoute === "/services" && "isactive"
+              } hover:text-[--text-hover] transition-all delay-75 text-[18px]`}
+            >
+              <Link href="/services">Services</Link>
+            </li>
+            <li
+              className={`${
+                currentRoute === "/gallery" && "isactive"
+              } hover:text-[--text-hover] transition-all delay-75 text-[18px]`}
+            >
+              <Link href="/gallery">Contact Us</Link>
+            </li>
+            <li
+              className={`${
+                currentRoute === "/faq" && "isactive"
+              } hover:text-[--text-hover] transition-all delay-75 text-[18px]`}
+            >
+              <Link href="/faq">FAQ</Link>
+            </li>
+            <li
+              className={`${
+                currentRoute === "/contact" && "isactive"
+              } hover:text-[--text-hover] transition-all delay-75 text-[18px]`}
+            >
+              <Link href="/contact">Contact Us</Link>
+            </li>
+          </ul>
+        </div>
+      </div>
     </>
   );
 };

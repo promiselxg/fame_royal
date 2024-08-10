@@ -1,11 +1,19 @@
+"use client";
 import { playfair, work_sans } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
 import WhyUs from "../_components/whyUs";
 import Image from "next/image";
 import { FiFacebook, FiInstagram, FiTwitter } from "react-icons/fi";
 import Link from "next/link";
+import { useEffect } from "react";
 
 const About = () => {
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
   return (
     <>
       <section className="flex w-full flex-col">

@@ -19,8 +19,8 @@ const WhyUs = () => {
               <div className="bg-[white] min-w-[250px]  boxShadow overflow-hidden rounded-[10px]">
                 <div className="w-full h-[180px]">
                   <Image
-                    src="https://travio.smartdemowp.com/wp-content/uploads/2021/02/feature-1.jpg"
-                    alt="boy"
+                    src="/img/feature-1.jpg"
+                    alt="Tour Guide"
                     width={200}
                     height={200}
                     className="bg-cover w-full h-[180px]"
@@ -32,14 +32,14 @@ const WhyUs = () => {
                       `${work_sans.className} text-[17px] font-[600] leading-tight`
                     )}
                   >
-                    2000+ Our Worldwide Guide
+                    Dedicated Tour Guide
                   </h2>
                 </div>
               </div>
               <div className="bg-[white] min-w-[250px]  boxShadow overflow-hidden rounded-[10px]">
                 <div className="w-full h-[180px]">
                   <Image
-                    src="https://travio.smartdemowp.com/wp-content/uploads/2021/02/feature-2.jpg"
+                    src="/img/trusted.jpeg"
                     alt="boy"
                     width={200}
                     height={200}
@@ -59,8 +59,8 @@ const WhyUs = () => {
               <div className="bg-[white] min-w-[250px]  boxShadow overflow-hidden rounded-[10px]">
                 <div className="w-full h-[180px]">
                   <Image
-                    src="https://travio.smartdemowp.com/wp-content/uploads/2021/02/feature-3.jpg"
-                    alt="boy"
+                    src="/img/feature-3.jpg"
+                    alt="Travel Experience"
                     width={200}
                     height={200}
                     className="bg-cover w-full h-[180px]"
@@ -72,15 +72,15 @@ const WhyUs = () => {
                       `${work_sans.className} text-[17px] font-[600] leading-tight`
                     )}
                   >
-                    12+ Years of Travel Experience
+                    3+ Years of Travel Experience
                   </h2>
                 </div>
               </div>
               <div className="bg-[white] min-w-[250px]  boxShadow overflow-hidden rounded-[10px]">
                 <div className="w-full h-[180px]">
                   <Image
-                    src="https://travio.smartdemowp.com/wp-content/uploads/2021/02/feature-4.jpg"
-                    alt="boy"
+                    src="/img/happy.jpeg"
+                    alt="98% of Our Travelers are Happy"
                     width={200}
                     height={200}
                     className="bg-cover w-full h-[180px]"
@@ -92,7 +92,7 @@ const WhyUs = () => {
                       `${work_sans.className} text-[17px] font-[600] leading-tight`
                     )}
                   >
-                    98% of Our Travelers are Happy
+                    Travelers Satisfaction
                   </h2>
                 </div>
               </div>
