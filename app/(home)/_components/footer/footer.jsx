@@ -38,9 +38,9 @@ const Footer = () => {
                   `${work_sans.className} text-sm text-[whitesmoke] leading-tight`
                 )}
               >
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Inventore, rerum dolor aperiam perferendis tempore porro
-                architecto fugit.
+                Fame Royal Travels is a premier travel and tour company in
+                Nigeria, renowned for its prominent status in the travel and
+                tourism sector.
               </p>
               <div className="text-white flex items-center gap-2 text-[20px] py-10">
                 <Link
