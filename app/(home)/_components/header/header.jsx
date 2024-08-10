@@ -203,7 +203,7 @@ const Header = () => {
               } hover:text-[--text-hover] transition-all delay-75 text-[18px]`}
             >
               <Link href="/gallery" onMouseDown={hanldeOpenNav}>
-                Contact Us
+                Gallery
               </Link>
             </li>
             <li
