@@ -18,19 +18,8 @@ const Header = () => {
 
   return (
     <>
-      <section>
-        {/* <div
-          className={cn(
-            `${work_sans.className} hidden w-full md:flex bg-[--primary-background] text-[--primary-background-text] font-[600] text-[16px]`
-          )}
-        >
-          <div className="container mx-auto md:w-[1200px] w-full md:min-h-[60px] flex items-center gap-8">
-            <span>enquiry@fameroyaltravels.com</span>
-            <span>08023788647 | 07065113888 | 08136781136</span>
-            <span>Plot 539 Sunday Adewusi Street, Guzape, Abuja, Nigeria </span>
-          </div>
-        </div> */}
-        <header className="flex w-full">
+      <section className="sticky w-full bg-[white] top-0 z-50">
+        <header className="flex w-full ">
           <div className="conatiner mx-auto min-h-[50px] flex items-center bg-[white] w-[90%] md:w-[1200px] justify-between">
             <div className="relative  py-[36px] px-0">
               <figure>
@@ -177,49 +166,63 @@ const Header = () => {
                 currentRoute === "/" && "isactive"
               } hover:text-[--text-hover] transition-all delay-75 text-[18px]`}
             >
-              <Link href="/">Home</Link>
+              <Link href="/" onMouseDown={hanldeOpenNav}>
+                Home
+              </Link>
             </li>
             <li
               className={`${
                 currentRoute === "/tour" && "isactive"
               } hover:text-[--text-hover] transition-all delay-75 text-[18px]`}
             >
-              <Link href="/tour">Tours</Link>
+              <Link href="/tour" onMouseDown={hanldeOpenNav}>
+                Tours
+              </Link>
             </li>
             <li
               className={`${
                 currentRoute === "/product" && "isactive"
               } hover:text-[--text-hover] transition-all delay-75 text-[18px]`}
             >
-              <Link href="/product">Our Products</Link>
+              <Link href="/product" onMouseDown={hanldeOpenNav}>
+                Our Products
+              </Link>
             </li>
             <li
               className={`${
                 currentRoute === "/services" && "isactive"
               } hover:text-[--text-hover] transition-all delay-75 text-[18px]`}
             >
-              <Link href="/services">Services</Link>
+              <Link href="/services" onMouseDown={hanldeOpenNav}>
+                Services
+              </Link>
             </li>
             <li
               className={`${
                 currentRoute === "/gallery" && "isactive"
               } hover:text-[--text-hover] transition-all delay-75 text-[18px]`}
             >
-              <Link href="/gallery">Contact Us</Link>
+              <Link href="/gallery" onMouseDown={hanldeOpenNav}>
+                Contact Us
+              </Link>
             </li>
             <li
               className={`${
                 currentRoute === "/faq" && "isactive"
               } hover:text-[--text-hover] transition-all delay-75 text-[18px]`}
             >
-              <Link href="/faq">FAQ</Link>
+              <Link href="/faq" onMouseDown={hanldeOpenNav}>
+                FAQ
+              </Link>
             </li>
             <li
               className={`${
                 currentRoute === "/contact" && "isactive"
               } hover:text-[--text-hover] transition-all delay-75 text-[18px]`}
             >
-              <Link href="/contact">Contact Us</Link>
+              <Link href="/contact" onMouseDown={hanldeOpenNav}>
+                Contact Us
+              </Link>
             </li>
           </ul>
         </div>
