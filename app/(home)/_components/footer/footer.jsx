@@ -1,3 +1,4 @@
+"use client";
 import { playfair, work_sans } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
@@ -252,7 +253,8 @@ const Footer = () => {
                 `${work_sans.className} text-sm md:text-[16px] font-[600]`
               )}
             >
-              Royal Fame Travels 2024 All Right Reserved
+              Fame Royal Travels &copy; {new Date().getFullYear()} All Right
+              Reserved
             </h1>
           </div>
           <div
