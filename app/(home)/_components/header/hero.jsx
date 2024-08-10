@@ -15,12 +15,12 @@ const Hero = () => {
               `${playfair.className} text-[40px] md:text-[80px] font-[900] leading-tight`
             )}
           >
-            Explore <br />
-            Your Travel
+            Fame <br />
+            Royal Travels.
           </h2>
-          <p className={cn(`${work_sans.className} text-[17px] md:ml-[12px]`)}>
-            Discover your next great adventure, become an explorer to get
-            started!
+          <p className={cn(`${work_sans.className} text-[17px]`)}>
+            We operate with unwavering commitment to: <br />
+            professionalism,integrity, deligence and transparency.
           </p>
         </div>
         <div className="hidden md:flex md:flex-col md:absolute md:top-20 md:right-[100px] w-full max-w-[400px] h-[480px] boxShadow px-5 py-3 bg-[whitesmoke] rounded-[3px] gap-y-3 z-10">
