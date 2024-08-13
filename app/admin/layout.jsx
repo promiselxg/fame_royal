@@ -1,8 +1,7 @@
-import "./globals.css";
+import "./dashboard.css";
 import { cn } from "@/lib/utils";
 import { playfair } from "@/lib/fonts";
-import Header from "./(home)/_components/header/header";
-import Footer from "./(home)/_components/footer/footer";
+import ToggleSideNav from "./_components/sidenav/toggle";
 
 export const metadata = {
   title: "FAME ROYAL TRAVELS AND MULTISERVICES LIMITED",
@@ -13,11 +12,15 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={cn(`${playfair.className}`)}>
-        <Header />
-
-        {children}
-        <Footer />
+      <body
+        className={cn(
+          `${playfair.className} w-full h-fit flex md:h-screen overflow-hidden`
+        )}
+      >
+        <div className="bg-[whitesmoke] h-screen rounded-[8px] w-full overflow-hidden relative">
+          <ToggleSideNav />
+          {children}
+        </div>
       </body>
     </html>
   );

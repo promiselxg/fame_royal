@@ -1,4 +1,5 @@
 "use client";
+import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { playfair, work_sans } from "@/lib/fonts";
@@ -6,11 +7,10 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 
-import Hero from "./(home)/_components/header/hero";
-import WhyUs from "./(home)/_components/whyUs";
-import Services from "./(home)/_components/ourServices";
-import Products from "./(home)/_components/products";
-import { useEffect } from "react";
+import Hero from "../_components/header/hero";
+import WhyUs from "../_components/whyUs";
+import Services from "../_components/ourServices";
+import Products from "../_components/products";
 
 export default function Home() {
   useEffect(() => {
