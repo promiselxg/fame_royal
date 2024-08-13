@@ -47,7 +47,7 @@ export default function Home() {
                 `${playfair.className} text-[20px] md:text-[45px] font-[900] leading-[1.2]`
               )}
             >
-              A message from our C.E.O.
+              CEO Message
             </h2>
             <p
               className={cn(

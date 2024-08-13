@@ -27,11 +27,8 @@ const SideNav = () => {
   const [openDropDown, setOpenDropDown] = useState(false);
 
   const currentRoute = usePathname();
-  const [openNavBar, setOpenNavBar] = useState(false);
+  const [openNavBar, setOpenNavBar] = useState(true);
 
-  const handleOpenNav = () => {
-    setOpenNavBar(!openNavBar);
-  };
   const user = {
     token: "",
   };
@@ -183,103 +180,14 @@ const SideNav = () => {
                   <h1 className="text-[20px]">&#8358;</h1>Transactions
                 </Link>
               </li>
-              {/* <li
-                className={`${
-                  currentRoute === "/admin/report/log" && "active"
-                } my-[2px] h-10 nav`}
-              >
-                <Link
-                  href={`/admin/report/log?q=${user?.token}`}
-                  className="flex gap-2 items-center py-2  h-8 leading-tight relative"
-                >
-                  <span className="w-[1px] h-8 rounded-r-[5px] border-r-4 border-transparent"></span>
-                  <StickyNote size={18} />
-                  Logs
-                </Link>
-              </li> */}
+
               <Separator
                 className="my-2 w-full bg-[rgba(255,255,255,0.1)] "
                 orientation="horizontal"
               />
               <span className="my-2 px-3 ">Settings</span>
-              {/* <li
-                className={`${
-                  (currentRoute === "/admin/setting" && "active") ||
-                  (currentRoute === "/admin/setting/add" && "active") ||
-                  (currentRoute.includes("/admin/setting/edit/") && "active")
-                } my-[2px] h-10 nav`}
-              >
-                <Link
-                  href="/admin/setting"
-                  className="flex gap-2 items-center py-2  h-8 leading-tight relative"
-                >
-                  <span className="w-[1px] h-8 rounded-r-[5px] border-r-4 border-transparent"></span>
-                  <Settings size={18} />
-                  Settings
-                </Link>
-              </li> */}
-              <li
-                className={cn(
-                  `${openDropDown ? "active" : ""} my-[2px] h-10 nav w-full`
-                )}
-                onClick={() => setOpenDropDown(!openDropDown)}
-              >
-                <div className="flex gap-2 items-center py-2  h-8 leading-tight relative">
-                  <span className="w-[1px] h-8 rounded-r-[5px] border-r-4 border-transparent"></span>
-                  <Settings size={18} />
-                  Settings
-                </div>
-              </li>
             </ul>
-            <ul
-              className={cn(
-                `${
-                  openDropDown
-                    ? "showDropDown w-full bg-[--header-bg] text-white border border-[rgba(255,255,255,0.3)] py-1"
-                    : "h-0 overflow-hidden"
-                } transition-all delay-75`
-              )}
-            >
-              <li className="my-[2px] h-10 hover:text-[--text-brown] transition-all delay-75">
-                <Link
-                  href={`/admin/setting/type?q=${user?.token}`}
-                  className={`${
-                    currentRoute === "/admin/setting/type" &&
-                    "text-[--text-brown]"
-                  } flex gap-2 items-center py-2  h-8 leading-tight relative`}
-                >
-                  <span className="w-[1px] h-8 rounded-r-[5px] border-r-4 border-transparent"></span>
-                  <Plus size={18} />
-                  Vehicle Make
-                </Link>
-              </li>
-              <li className="my-[2px] h-10 hover:text-[--text-brown] transition-all delay-75">
-                <Link
-                  href={`/admin/setting/model?q=${user?.token}`}
-                  className={`${
-                    currentRoute === "/admin/setting/model" &&
-                    "text-[--text-brown]"
-                  } flex gap-2 items-center py-2  h-8 leading-tight relative`}
-                >
-                  <span className="w-[1px] h-8 rounded-r-[5px] border-r-4 border-transparent"></span>
-                  <Plus size={18} />
-                  Vehicle Model
-                </Link>
-              </li>
-              <li className="my-[2px] h-10 hover:text-[--text-brown] transition-all delay-75">
-                <Link
-                  href={`/admin/setting/feature?q=${user?.token}`}
-                  className={`${
-                    currentRoute === "/admin/setting/feature" &&
-                    "text-[--text-brown]"
-                  } flex gap-2 items-center py-2  h-8 leading-tight relative`}
-                >
-                  <span className="w-[1px] h-8 rounded-r-[5px] border-r-4 border-transparent"></span>
-                  <Plus size={18} />
-                  Vehicle Features
-                </Link>
-              </li>
-            </ul>
+
             <div className="w-full py-5">
               <Button className="bg-[#474747] w-full  justify-start flex items-center gap-2 rounded-[8px] text-white font-[600] p-2 hover:bg-[rgb(71,71,71,.8)]">
                 <Power size={18} />

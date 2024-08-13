@@ -7,6 +7,7 @@ import React from "react";
 import { FiClock, FiMapPin } from "react-icons/fi";
 
 const Products = () => {
+  const price = "";
   return (
     <>
       <section className="flex bg-[#f5f6f6] py-[50px] md:py-[100px]">
@@ -29,7 +30,7 @@ const Products = () => {
             <div className="bg-white md:min-w-[300px] boxShadow rounded-[5px]  overflow-hidden">
               <div className="w-full h-[280px] overflow-hidden">
                 <Image
-                  src="https://travio.smartdemowp.com/wp-content/uploads/2021/02/tour-1.jpg"
+                  src="/img/dubia_city.jpg"
                   width={300}
                   height={300}
                   alt="tour 1"
@@ -43,20 +44,22 @@ const Products = () => {
                       `${work_sans.className} text-[17px] font-[600]`
                     )}
                   >
-                    Moscow Red City Land
+                    Dubia
                   </h1>
                 </span>
-                <div className="w-full flex gap-2 py-2">
-                  <span
-                    className={cn(
-                      `${work_sans.className} text-[17px] font-[600]`
-                    )}
-                  >
-                    &#8358;5,000
-                  </span>
-                  <span>/</span>
-                  <span className="text-sm">per person</span>
-                </div>
+                {price && (
+                  <div className="w-full flex gap-2 py-2">
+                    <span
+                      className={cn(
+                        `${work_sans.className} text-[17px] font-[600]`
+                      )}
+                    >
+                      &#8358;5,000
+                    </span>
+                    <span>/</span>
+                    <span className="text-sm">per person</span>
+                  </div>
+                )}
                 <div
                   className={cn(
                     `${work_sans.className} bg-[whitesmoke] p-4 w-full font-[600] text-sm flex justify-between rounded-[2px]`
@@ -91,7 +94,7 @@ const Products = () => {
             <div className="bg-white w-full md:min-w-[300px] boxShadow rounded-[5px] overflow-hidden">
               <div className="w-full h-[280px] overflow-hidden">
                 <Image
-                  src="https://travio.smartdemowp.com/wp-content/uploads/2021/02/tour-1.jpg"
+                  src="/img/moscow.webp"
                   width={300}
                   height={300}
                   alt="tour 1"
@@ -105,20 +108,22 @@ const Products = () => {
                       `${work_sans.className} text-[17px] font-[600]`
                     )}
                   >
-                    Moscow Red City Land
+                    Moscow
                   </h1>
                 </span>
-                <div className="w-full flex gap-2 py-2">
-                  <span
-                    className={cn(
-                      `${work_sans.className} text-[17px] font-[600]`
-                    )}
-                  >
-                    &#8358;5,000
-                  </span>
-                  <span>/</span>
-                  <span className="text-sm">per person</span>
-                </div>
+                {price && (
+                  <div className="w-full flex gap-2 py-2">
+                    <span
+                      className={cn(
+                        `${work_sans.className} text-[17px] font-[600]`
+                      )}
+                    >
+                      &#8358;5,000
+                    </span>
+                    <span>/</span>
+                    <span className="text-sm">per person</span>
+                  </div>
+                )}
                 <div
                   className={cn(
                     `${work_sans.className} bg-[whitesmoke] p-4 w-full font-[600] text-sm flex justify-between rounded-[2px]`
@@ -153,7 +158,7 @@ const Products = () => {
             <div className="bg-white w-full md:min-w-[300px] boxShadow rounded-[5px] overflow-hidden">
               <div className="w-full h-[280px] overflow-hidden">
                 <Image
-                  src="https://travio.smartdemowp.com/wp-content/uploads/2021/02/tour-1.jpg"
+                  src="/img/singapore.webp"
                   width={300}
                   height={300}
                   alt="tour 1"
@@ -167,20 +172,22 @@ const Products = () => {
                       `${work_sans.className} text-[17px] font-[600]`
                     )}
                   >
-                    Moscow Red City Land
+                    Singapore City Tour
                   </h1>
                 </span>
-                <div className="w-full flex gap-2 py-2">
-                  <span
-                    className={cn(
-                      `${work_sans.className} text-[17px] font-[600]`
-                    )}
-                  >
-                    &#8358;5,000
-                  </span>
-                  <span>/</span>
-                  <span className="text-sm">per person</span>
-                </div>
+                {price && (
+                  <div className="w-full flex gap-2 py-2">
+                    <span
+                      className={cn(
+                        `${work_sans.className} text-[17px] font-[600]`
+                      )}
+                    >
+                      &#8358;5,000
+                    </span>
+                    <span>/</span>
+                    <span className="text-sm">per person</span>
+                  </div>
+                )}
                 <div
                   className={cn(
                     `${work_sans.className} bg-[whitesmoke] p-4 w-full font-[600] text-sm flex justify-between rounded-[2px]`
