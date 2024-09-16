@@ -1,6 +1,7 @@
 "use client";
 import { playfair, work_sans } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
+import Tawk from "@/utils/tawk";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -278,6 +279,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
+      <Tawk />
     </>
   );
 };

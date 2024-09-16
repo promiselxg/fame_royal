@@ -11,6 +11,7 @@ import Hero from "../_components/header/hero";
 import WhyUs from "../_components/whyUs";
 import Services from "../_components/ourServices";
 import Products from "../_components/products";
+import HighlightDestination from "../_components/highlightDestination";
 
 export default function Home() {
   useEffect(() => {
@@ -79,32 +80,7 @@ export default function Home() {
         </div>
       </section>
       <Services />
-      <section className="flex md:h-[600px] bg-ad-bg bg-no-repeat bg-center bg-cover relative py-[150px] px-0 items-center">
-        <div className="deals-section"></div>
-        <div className="container mx-auto z-10">
-          <div className="max-w-[400px] bg-white p-5 rounded-[5px] boxShadow leading-[1.2] gap-y-2 flex flex-col">
-            <h2
-              className={cn(
-                `${work_sans.className} text-[20px] md:text-[40px] font-[600]`
-              )}
-            >
-              Group Travel to New Zealand
-            </h2>
-            <p className={cn(`${work_sans.className} text-sm font-[400]`)}>
-              Lorem ipsum dolor amet consectetur adipiscing sed do eiusmod
-              tempor ux incidunt labore dolore magna aliqua Quis ipsum suspen.
-              bgbd
-            </p>
-            <Button
-              className={cn(
-                `${work_sans.className} btn-default bg-[--light-yellow-text] hover:bg-[--btn-hover] py-[17.5px] px-[36px] md:h-[55px] w-fit mt-5`
-              )}
-            >
-              See details
-            </Button>
-          </div>
-        </div>
-      </section>
+      <HighlightDestination />
       <Products />
       <section className="flex relative bg-[rgba(0,0,0,0.8)] md:h-[400px] deals-section overflow-hidden py-[50px] md:py-0">
         <div className="pattern-layer bg-shape-4 bg-no-repeat bg-center bg-cover"></div>

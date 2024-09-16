@@ -63,9 +63,7 @@ const AddCar = () => {
   };
   //const { user } = useContext(AuthContext);
   const { data, loading: loadingData } = useFetch("/setting/vehicle_type");
-  const { data: brandData, loading: loadingBrand } = useFetch(
-    "/setting/vehicle_brand"
-  );
+
   const form = useForm({
     resolver: zodResolver(formSchema),
   });
@@ -342,6 +340,26 @@ const AddCar = () => {
                     )}
                   />
                 </div>
+                <FormField
+                  control={form.control}
+                  name="amount"
+                  render={({ field }) => (
+                    <FormItem className="w-full">
+                      <FormLabel>Amount</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="Amount"
+                          {...field}
+                          className="form-input"
+                          id="amount"
+                          defaultValue={field.value}
+                          onKeyUp={() => acceptNumbersOnly("amount")}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
                 <FormField
                   control={form.control}
                   name="amount"

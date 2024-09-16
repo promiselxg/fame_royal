@@ -5,7 +5,7 @@ import DashboardCard from "../_components/stats/Card";
 import { BookA } from "lucide-react";
 
 const Dashboard = () => {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   return (
     <>
       <section className="w-full flex h-screen flex-col gap-y-5 p-5 overflow-y-scroll bg-[whitesmoke]">

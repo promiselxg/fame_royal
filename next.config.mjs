@@ -27,6 +27,11 @@ const nextConfig = {
         hostname: "travosy.vercel.app",
         port: "",
       },
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+        port: "",
+      },
     ],
   },
 };

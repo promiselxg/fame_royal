@@ -53,12 +53,12 @@ export const columns = [
     header: "Price",
   },
   {
-    accessorKey: "included",
-    header: "Included",
+    accessorKey: "duration",
+    header: "Duration",
   },
   {
-    accessorKey: "excluded",
-    header: "Excluded",
+    accessorKey: "date",
+    header: "Date",
   },
   {
     id: "actions",
