@@ -9,7 +9,7 @@ const Tawk = () => {
       var s1 = document?.createElement("script"),
         s0 = document?.getElementsByTagName("script")[0];
       s1.async = true;
-      s1.src = "https://embed.tawk.to/666eddcb981b6c56477de54b/1i0gh4pgc";
+      s1.src = "https://embed.tawk.to/66e9684250c10f7a00abcf07/1i7vruhrm";
       s1.charset = "UTF-8";
       s1.setAttribute("crossorigin", "*");
       s0.parentNode.insertBefore(s1, s0);
