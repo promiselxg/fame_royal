@@ -130,13 +130,21 @@ const Header = () => {
               )}
             </div>
             <div className="hidden md:flex">
-              <Button
-                className={cn(
-                  `${work_sans.className} btn-default bg-[--light-yellow-text] hover:bg-[--btn-hover] py-[17.5px] px-[36px] md:h-[55px]`
-                )}
-              >
-                Book a tour
-              </Button>
+              <a href="https://wa.me/2347015564131" target="_blank">
+                <Button
+                  className={cn(
+                    `${work_sans.className} btn-default bg-[--btn-hover]  hover:bg-[--light-yellow-text] py-[17.5px] px-[20px] md:h-[55px] flex items-center gap-2 justify-between`
+                  )}
+                >
+                  <span className="text-[16px]">Chat on </span>
+                  <Image
+                    src="/img/whatsapp.svg"
+                    width={90}
+                    height={80}
+                    alt="chat on whatsapp"
+                  />
+                </Button>
+              </a>
             </div>
           </div>
         </header>
@@ -155,7 +163,7 @@ const Header = () => {
           size={45}
           onClick={hanldeOpenNav}
         />
-        <div className="h-screen justify-center items-center flex">
+        <div className="h-screen justify-center items-center flex flex-col gap-y-3">
           <ul
             className={cn(
               `${work_sans.className} text-white md:flex items-center gap-5 text-sm uppercase space-y-8`
@@ -225,6 +233,23 @@ const Header = () => {
               </Link>
             </li>
           </ul>
+          <div className="flex mt-6">
+            <a href="https://wa.me/2347015564131" target="_blank">
+              <Button
+                className={cn(
+                  `${work_sans.className} btn-default bg-[--light-yellow-text]  hover:bg-[--btn-hover] py-[17.5px] px-[20px] md:h-[55px] flex items-center gap-2 justify-between`
+                )}
+              >
+                <span className="text-[16px]">Chat on </span>
+                <Image
+                  src="/img/whatsapp.svg"
+                  width={90}
+                  height={80}
+                  alt="chat on whatsapp"
+                />
+              </Button>
+            </a>
+          </div>
         </div>
       </div>
     </>
