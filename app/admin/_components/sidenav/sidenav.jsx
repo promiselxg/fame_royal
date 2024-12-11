@@ -22,17 +22,16 @@ import { barlow } from "@/lib/fonts";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
 import { usePathname } from "next/navigation";
+import AuthContext from "@/context/authContext";
+import AuthModal from "../modal/passwordModal";
+import UsernameModal from "../modal/usernameModal";
+import { truncateText } from "@/utils/trucateText";
 
 const SideNav = () => {
   const [openDropDown, setOpenDropDown] = useState(false);
 
   const currentRoute = usePathname();
-  const [openNavBar, setOpenNavBar] = useState(true);
-
-  const user = {
-    token: "",
-  };
-
+  const { user, openNavBar, handleLogOut } = useContext(AuthContext);
   return (
     <>
       <ScrollArea
@@ -64,31 +63,59 @@ const SideNav = () => {
               </li>
               <li
                 className={`${
-                  (currentRoute === "/admin/drivers" && "active") ||
-                  (currentRoute === "/admin/drivers/add" && "active") ||
-                  (currentRoute.includes("/admin/drivers/edit/") && "active")
+                  currentRoute === "/admin/banner" && "active"
                 } my-[2px] h-10 nav`}
               >
                 <Link
-                  href={`/admin/tour?q=${user?.token}`}
+                  href={`/admin/banner?q=${user?.token}`}
                   className="flex gap-2 items-center py-2  h-8 leading-tight relative"
                 >
                   <span className="w-[1px] h-8 rounded-r-[5px] border-r-4 border-transparent"></span>
-                  <CarFront size={18} />
-                  Tours
+                  <LayoutDashboard size={18} />
+                  Site Banner
                 </Link>
               </li>
-
               <Separator
                 className="my-2 w-full bg-[rgba(255,255,255,0.1)] "
                 orientation="horizontal"
               />
+              <span className="my-2 px-3 ">Settings</span>
+              <li
+                className={cn(
+                  `${openDropDown ? "active" : ""} my-[2px] h-10 nav w-full`
+                )}
+                onClick={() => setOpenDropDown(!openDropDown)}
+              >
+                <div className="flex gap-2 items-center py-2  h-8 leading-tight relative">
+                  <span className="w-[1px] h-8 rounded-r-[5px] border-r-4 border-transparent"></span>
+                  <Settings size={18} />
+                  Settings
+                </div>
+              </li>
             </ul>
-
+            <ul
+              className={cn(
+                `${
+                  openDropDown
+                    ? "showDropDown w-full bg-[--header-bg] text-white border border-[rgba(255,255,255,0.3)] py-1"
+                    : "h-0 overflow-hidden"
+                } transition-all delay-75`
+              )}
+            >
+              <li className="my-[2px] h-10 hover:text-[--text-brown] transition-all delay-75">
+                <AuthModal />
+              </li>
+              <li className="my-[2px] h-10 hover:text-[--text-brown] transition-all delay-75">
+                <UsernameModal />
+              </li>
+            </ul>
             <div className="w-full py-5">
-              <Button className="bg-[#474747] w-full  justify-start flex items-center gap-2 rounded-[8px] text-white font-[600] p-2 hover:bg-[rgb(71,71,71,.8)]">
+              <Button
+                className="bg-[#474747] w-full  justify-start flex items-center gap-2 rounded-[8px] text-white font-[600] p-2 hover:bg-[rgb(71,71,71,.8)]"
+                onClick={() => handleLogOut()}
+              >
                 <Power size={18} />
-                Logout
+                Logout ({user && truncateText(user?.username, 15)})
               </Button>
             </div>
           </div>

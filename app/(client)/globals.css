@@ -1,0 +1,134 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --primary-background: #14161c;
+    --primary-background-text: #fff;
+    --light-yellow-text: #ca2723;
+    --btn-hover: #061a3a;
+  }
+
+  .dark {
+    --primary-background: #fff;
+    --primary-background-text: #14161c;
+    --light-yellow-text: #ca2723;
+    --btn-hover: #061a3a;
+  }
+}
+html {
+  scroll-behavior: smooth !important;
+}
+.boxShadow {
+  box-shadow: 0 20px 50px 0 rgba(0, 0, 0, 0.2);
+}
+.btn-default {
+  position: relative;
+  overflow: hidden;
+
+  line-height: 25px;
+  color: #fff !important;
+  text-align: center;
+  border-radius: 4px;
+  z-index: 1;
+  transition: all 500ms ease;
+}
+.navigation li {
+  padding: 35px 0;
+  margin: 0 20px;
+  transition: all 300ms ease;
+}
+.navigation li a {
+  position: relative;
+  display: block;
+  text-align: center;
+  font-size: 17px;
+  line-height: 30px;
+  font-weight: 500;
+  opacity: 1;
+  z-index: 1;
+  transition: all 500ms ease;
+}
+.deals-section:before {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 100%;
+  background: -webkit-linear-gradient(0deg, #061a38 20%, rgba(0, 0, 0, 0) 100%);
+  top: 0;
+  right: 0;
+}
+.pattern-layer {
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+  width: 100%;
+  height: 830px;
+  background-repeat: repeat-x;
+  animation: slide 100s linear infinite;
+  -webkit-animation: slide 100s linear infinite;
+}
+.zoom-in {
+  transition: transform 0.3s ease;
+}
+.zoom-in:hover {
+  transform: scale(1.05);
+}
+.paragraph p {
+  color: rgba(0, 0, 0, 0.8);
+  font-size: 0.975rem !important;
+  line-height: 1.55rem;
+  font-family: "Work Sans", sans-serif !important;
+  margin-bottom: 5px;
+}
+.overview p {
+  color: rgba(0, 0, 0, 0.7);
+  line-height: 2em;
+  font-size: 16px;
+  font-family: "Work Sans", sans-serif !important;
+}
+.teamMember:hover .social-links {
+  opacity: 1;
+  bottom: 34px;
+}
+.teamMember:hover .lower-content {
+  padding-bottom: 87px;
+  margin-top: -60px;
+}
+.lower-content {
+  transition: all 500ms ease;
+  padding: 22px 15px 27px;
+  background-color: white;
+}
+.social-links {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  opacity: 0;
+  transition: all 500ms ease;
+}
+.isactive {
+  color: var(--light-yellow-text);
+}
+.navbar {
+  transition: all 0.3s ease-in;
+}
+@keyframes slide {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 1920px 0;
+  }
+}
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}

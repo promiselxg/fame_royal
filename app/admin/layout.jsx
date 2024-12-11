@@ -1,30 +1,40 @@
+import { raleway } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
-import { work_sans } from "@/lib/fonts";
-import ToggleSideNav from "./_components/sidenav/toggle";
-import SideNav from "./_components/sidenav/sidenav";
-import "../globals.css";
+import "../(client)/globals.css";
 import "./dashboard.css";
 
+import SideNav from "./_components/sidenav/sidenav";
+import { AuthContextProvider } from "@/context/authContext";
+import ToggleSideNav from "./_components/sidenav/toggle";
+import { ImageProvider } from "@/context/imageUpload.context";
+import { Toaster } from "@/components/ui/toaster";
+
 export const metadata = {
-  title: "FAME ROYAL TRAVELS AND MULTISERVICES LIMITED",
-  description:
-    "Fame Royal Travels is a premier travel and tour company in Nigeria, renowned for its prominent status in the travel and tourism sector. Founded on 16th November 2012, we prioritize both individual and corporate travel needs.",
+  title: "Dashboard |  Rofad91 logistic services ltd",
+  description: "Rofad91 logistic services ltd",
 };
+
+export const fetchCache = "force-no-store";
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
-        className={cn(
-          `${work_sans.className} w-full h-fit flex md:h-screen overflow-hidden`
-        )}
-      >
-        <SideNav />
-        <div className="bg-[whitesmoke] h-screen rounded-[8px] w-full overflow-hidden relative">
-          <ToggleSideNav />
-          {children}
-        </div>
-      </body>
+      <AuthContextProvider>
+        <ImageProvider>
+          <body
+            className={cn(
+              `${raleway.className} w-full h-fit flex md:h-screen overflow-hidden`
+            )}
+          >
+            <SideNav />
+            <div className="bg-[whitesmoke] h-screen rounded-[8px] w-full overflow-hidden relative">
+              <ToggleSideNav />
+              {children}
+            </div>
+            <Toaster />
+          </body>
+        </ImageProvider>
+      </AuthContextProvider>
     </html>
   );
 }

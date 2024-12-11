@@ -6,3 +6,35 @@ datasource db {
   provider = "mongodb"
   url      = env("DATABASE_URL")
 }
+model registeredUser {
+  id                    String     @id @default(cuid()) @map("_id")
+  username              String     @unique
+  password              String
+  role                  Int[]   
+  admin                 Boolean    @default(false)
+  resetPasswordToken    String?
+  resetPasswordExpire   DateTime?
+  activated             Boolean    @default(true)
+  createdAt             DateTime   @default(now())
+  updatedAt             DateTime   @updatedAt
+}
+model logger {
+  id        String   @id @default(cuid()) @map("_id")
+  userAgent String
+  urlPath   String
+  logStatus String
+  method    String
+  action    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model slider {
+  id              String   @id @default(cuid()) @map("_id")
+  description     String?
+  slider_position Int
+  mediaUrl        String[]
+  imageId         String[]
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}

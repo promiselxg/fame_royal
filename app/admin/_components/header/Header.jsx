@@ -1,16 +1,18 @@
 "use client";
-
-import { playfair } from "@/lib/fonts";
+import AuthContext from "@/context/authContext";
+import { raleway } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
+import { useContext } from "react";
 
 const Header = () => {
+  const { user } = useContext(AuthContext);
   return (
     <>
       <div className="w-full flex h-20 bg-[#fafafb]">
         <div className="p-5 flex items-center justify-between w-full">
           <div>
-            <h1 className={cn(`${playfair.className} font-[900] text-[16px]`)}>
-              Welcome back
+            <h1 className={cn(`${raleway.className} font-[600] text-[16px]`)}>
+              Welcome back,{user?.username}
             </h1>
           </div>
         </div>
