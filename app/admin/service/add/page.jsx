@@ -13,14 +13,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { useImageContext } from "@/context/imageUpload.context";
 
 import { __, cn } from "@/lib/utils";
@@ -38,15 +30,15 @@ import AuthContext from "@/context/authContext";
 import { verifyToken } from "@/utils/verifyToken";
 import { uploadFilesToCloudinary } from "@/utils/uploadFilesToCloudinary";
 import { useToast } from "@/components/ui/use-toast";
+import { Textarea } from "@/components/ui/textarea";
 
 const formSchema = z.object({
-  description: z
-    .string({ required_error: "Give this banner a description." })
-    .min(5, { message: "the description must be at least 5 characters long." }),
-  banner_position: z.string({ required_error: "This field is required" }),
+  service_description: z
+    .string({ required_error: "This field is required" })
+    .min(20, { message: "give this service a detailed description." }),
 });
 
-const AddBanner = () => {
+const AddService = () => {
   const { user } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
 
@@ -57,14 +49,14 @@ const AddBanner = () => {
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      description: "",
+      service_description: "",
     },
   });
 
   async function onSubmit(values) {
     setLoading(true);
     // Validate required fields
-    const requiredFields = ["description", "banner_position"];
+    const requiredFields = ["service_description"];
     const missingFields = requiredFields.filter((field) => !values[field]);
     if (missingFields.length > 0) {
       setLoading(false);
@@ -89,7 +81,7 @@ const AddBanner = () => {
         photos,
       };
       // Submit data to the backend
-      const response = await axios.post(`${host.url}/banner`, data);
+      const response = await axios.post(`${host.url}/service`, data);
       if (response?.data?.message !== "success") {
         toast({
           variant: "destructive",
@@ -144,7 +136,7 @@ const AddBanner = () => {
         </div>
         <div className="w-full my-5 bg-[whitesmoke] px-5 flex flex-col h-screen ">
           <div className="p-5">
-            <h1 className={cn(`font-bold`)}>Add new Banner</h1>
+            <h1 className={cn(`font-bold`)}>Add Service</h1>
           </div>
           <div className="p-5 bg-white container w-full">
             <Form {...form}>
@@ -154,59 +146,25 @@ const AddBanner = () => {
               >
                 <FormField
                   control={form.control}
-                  name="description"
+                  name="service_description"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Description</FormLabel>
+                      <FormLabel>Services Description</FormLabel>
                       <FormControl>
-                        <Input
-                          placeholder="Description"
+                        <Textarea
+                          placeholder="Services Description"
                           {...field}
                           className="form-input"
                         />
                       </FormControl>
                       <FormDescription className="text-[12px] text-[#333]">
-                        Give this banner a description.
+                        give this service a detailed description.
                       </FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
 
-                <FormField
-                  control={form.control}
-                  name="banner_position"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Position</FormLabel>
-                      <Select
-                        onValueChange={field.onChange}
-                        defaultValue={field.value}
-                      >
-                        <FormControl>
-                          <SelectTrigger>
-                            <SelectValue placeholder="select banner position" />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                          <SelectItem value="1">1</SelectItem>
-                          <SelectItem value="2">2</SelectItem>
-                          <SelectItem value="3">3</SelectItem>
-                          <SelectItem value="4">4</SelectItem>
-                          <SelectItem value="5">5</SelectItem>
-                          <SelectItem value="6">6</SelectItem>
-                          <SelectItem value="7">7</SelectItem>
-                          <SelectItem value="8">8</SelectItem>
-                          <SelectItem value="9">9</SelectItem>
-                        </SelectContent>
-                      </Select>
-                      <FormDescription className="text-[12px] text-[#333]">
-                        this is the order the banner will appear on the website
-                      </FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
                 <div className="flex flex-col space-y-5">
                   <span>Add Photo</span>
                   <label htmlFor="files" className="w-fit ">
@@ -246,4 +204,4 @@ const AddBanner = () => {
   );
 };
 
-export default AddBanner;
+export default AddService;

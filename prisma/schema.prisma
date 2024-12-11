@@ -38,3 +38,83 @@ model slider {
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 }
+
+model tour {
+  id                          String   @id @default(cuid()) @map("_id")
+  tour_destination            String
+  tour_description            String
+  tour_fee                    String
+  tour_included_services      String?
+  tour_excluded_services      String?
+  mediaUrl                    String[]
+  imageId                     String[]
+  createdAt                   DateTime @default(now())
+  updatedAt                   DateTime @updatedAt
+}
+
+model product {
+  id              String   @id @default(cuid()) @map("_id")
+  product_title     String
+  product_description String
+  mediaUrl        String[]
+  imageId         String[]
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model service {
+  id              String   @id @default(cuid()) @map("_id")
+  service_description     String
+  mediaUrl        String[]
+  imageId         String[]
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model visaService {
+  id              String   @id @default(cuid()) @map("_id")
+  via_country_name     String
+  mediaUrl        String[]
+  imageId         String[]
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model gallary {
+  id              String   @id @default(cuid()) @map("_id")
+  gallary_title           String
+  mediaUrl        String[]
+  imageId         String[]
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model faq {
+  id              String   @id @default(cuid()) @map("_id")
+  question           String
+  answer           String
+  mediaUrl        String[]
+  imageId         String[]
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model team {
+  id              String   @id @default(cuid()) @map("_id")
+  team_name           String
+  position           String?
+  mediaUrl        String[]
+  imageId         String[]
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model destination {
+  id              String   @id @default(cuid()) @map("_id")
+  destination_title           String
+  destination_description          String
+  mediaUrl        String[]
+  imageId         String[]
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}

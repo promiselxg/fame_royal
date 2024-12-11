@@ -38,15 +38,20 @@ import AuthContext from "@/context/authContext";
 import { verifyToken } from "@/utils/verifyToken";
 import { uploadFilesToCloudinary } from "@/utils/uploadFilesToCloudinary";
 import { useToast } from "@/components/ui/use-toast";
+import { Textarea } from "@/components/ui/textarea";
+import { acceptNumbersOnly } from "@/utils/regExpression";
 
 const formSchema = z.object({
-  description: z
-    .string({ required_error: "Give this banner a description." })
-    .min(5, { message: "the description must be at least 5 characters long." }),
-  banner_position: z.string({ required_error: "This field is required" }),
+  tour_destination: z
+    .string({ required_error: "This field is required" })
+    .min(5, { message: "the destination must be at least 5 characters long." }),
+  tour_description: z.string({ required_error: "This field is required" }),
+  tour_fee: z.string({ required_error: "This field is required" }),
+  tour_included_services: z.string().optional(),
+  tour_excluded_services: z.string().optional(),
 });
 
-const AddBanner = () => {
+const AddTour = () => {
   const { user } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
 
@@ -57,14 +62,18 @@ const AddBanner = () => {
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      description: "",
+      tour_destination: "",
+      tour_description: "",
+      tour_fee: "",
+      tour_included_services: "",
+      tour_excluded_services: "",
     },
   });
 
   async function onSubmit(values) {
     setLoading(true);
     // Validate required fields
-    const requiredFields = ["description", "banner_position"];
+    const requiredFields = ["tour_destination", "tour_description", "tour_fee"];
     const missingFields = requiredFields.filter((field) => !values[field]);
     if (missingFields.length > 0) {
       setLoading(false);
@@ -89,7 +98,7 @@ const AddBanner = () => {
         photos,
       };
       // Submit data to the backend
-      const response = await axios.post(`${host.url}/banner`, data);
+      const response = await axios.post(`${host.url}/tour`, data);
       if (response?.data?.message !== "success") {
         toast({
           variant: "destructive",
@@ -135,7 +144,7 @@ const AddBanner = () => {
         <div className="w-full bg-white h-[60px] p-5 flex items-center border-[#eee] border-b-[1px]">
           <div className="w-fit flex  h-[60px]">
             <Link
-              href={`/admin/banner?q=${user?.token}`}
+              href={`/admin/tour?q=${user?.token}`}
               className="border-r-[1px] border-[#eee] w-fit flex items-center pr-5"
             >
               <ChevronLeft size={30} />
@@ -144,7 +153,7 @@ const AddBanner = () => {
         </div>
         <div className="w-full my-5 bg-[whitesmoke] px-5 flex flex-col h-screen ">
           <div className="p-5">
-            <h1 className={cn(`font-bold`)}>Add new Banner</h1>
+            <h1 className={cn(`font-bold`)}>Add new tour location</h1>
           </div>
           <div className="p-5 bg-white container w-full">
             <Form {...form}>
@@ -154,10 +163,10 @@ const AddBanner = () => {
               >
                 <FormField
                   control={form.control}
-                  name="description"
+                  name="tour_destination"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Description</FormLabel>
+                      <FormLabel>Tour Destination</FormLabel>
                       <FormControl>
                         <Input
                           placeholder="Description"
@@ -166,7 +175,7 @@ const AddBanner = () => {
                         />
                       </FormControl>
                       <FormDescription className="text-[12px] text-[#333]">
-                        Give this banner a description.
+                        tour destination
                       </FormDescription>
                       <FormMessage />
                     </FormItem>
@@ -175,33 +184,87 @@ const AddBanner = () => {
 
                 <FormField
                   control={form.control}
-                  name="banner_position"
+                  name="tour_description"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Position</FormLabel>
-                      <Select
-                        onValueChange={field.onChange}
-                        defaultValue={field.value}
-                      >
-                        <FormControl>
-                          <SelectTrigger>
-                            <SelectValue placeholder="select banner position" />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                          <SelectItem value="1">1</SelectItem>
-                          <SelectItem value="2">2</SelectItem>
-                          <SelectItem value="3">3</SelectItem>
-                          <SelectItem value="4">4</SelectItem>
-                          <SelectItem value="5">5</SelectItem>
-                          <SelectItem value="6">6</SelectItem>
-                          <SelectItem value="7">7</SelectItem>
-                          <SelectItem value="8">8</SelectItem>
-                          <SelectItem value="9">9</SelectItem>
-                        </SelectContent>
-                      </Select>
+                      <FormLabel>Tour Description</FormLabel>
+                      <FormControl>
+                        <Textarea
+                          placeholder="Description"
+                          {...field}
+                          className="form-input resize-none"
+                        />
+                      </FormControl>
                       <FormDescription className="text-[12px] text-[#333]">
-                        this is the order the banner will appear on the website
+                        tour description.
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="tour_fee"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Tour Fee</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="Fee"
+                          {...field}
+                          id="tour_fee"
+                          onKeyUp={() => acceptNumbersOnly("tour_fee")}
+                          className="form-input"
+                        />
+                      </FormControl>
+                      <FormDescription className="text-[12px] text-[#333]">
+                        tour fee
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="tour_included_services"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Included Services (optional)</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="services that are included in this tour package
+                        (seperated by comma)"
+                          {...field}
+                          className="form-input"
+                        />
+                      </FormControl>
+                      <FormDescription className="text-[12px] text-[#333]">
+                        services that are included in this tour package
+                        (seperated by comma)
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="tour_excluded_services"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Excluded Services (optional)</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="services that are not included in this tour package
+                        (seperated by comma)"
+                          {...field}
+                          className="form-input"
+                        />
+                      </FormControl>
+                      <FormDescription className="text-[12px] text-[#333]">
+                        services that are not included in this tour package
+                        (seperated by comma)
                       </FormDescription>
                       <FormMessage />
                     </FormItem>
@@ -221,6 +284,7 @@ const AddBanner = () => {
                     name="files"
                     id="files"
                     accept="image/png, image/gif, image/jpeg"
+                    multiple
                     onChange={handleImageChange}
                     className="hidden"
                   />
@@ -246,4 +310,4 @@ const AddBanner = () => {
   );
 };
 
-export default AddBanner;
+export default AddTour;

@@ -14,16 +14,9 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { useImageContext } from "@/context/imageUpload.context";
 
-import { __, cn } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ChevronLeft, CloudUpload, Loader2, X } from "lucide-react";
 import React, { useContext, useEffect, useState } from "react";
@@ -38,15 +31,14 @@ import AuthContext from "@/context/authContext";
 import { verifyToken } from "@/utils/verifyToken";
 import { uploadFilesToCloudinary } from "@/utils/uploadFilesToCloudinary";
 import { useToast } from "@/components/ui/use-toast";
+import { Textarea } from "@/components/ui/textarea";
 
 const formSchema = z.object({
-  description: z
-    .string({ required_error: "Give this banner a description." })
-    .min(5, { message: "the description must be at least 5 characters long." }),
-  banner_position: z.string({ required_error: "This field is required" }),
+  product_title: z.string({ required_error: "This field is required" }),
+  product_description: z.string({ required_error: "This field is required" }),
 });
 
-const AddBanner = () => {
+const AddProduct = () => {
   const { user } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
 
@@ -57,14 +49,15 @@ const AddBanner = () => {
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      description: "",
+      product_title: "",
+      product_description: "",
     },
   });
 
   async function onSubmit(values) {
     setLoading(true);
     // Validate required fields
-    const requiredFields = ["description", "banner_position"];
+    const requiredFields = ["product_title", "product_description"];
     const missingFields = requiredFields.filter((field) => !values[field]);
     if (missingFields.length > 0) {
       setLoading(false);
@@ -89,7 +82,7 @@ const AddBanner = () => {
         photos,
       };
       // Submit data to the backend
-      const response = await axios.post(`${host.url}/banner`, data);
+      const response = await axios.post(`${host.url}/product`, data);
       if (response?.data?.message !== "success") {
         toast({
           variant: "destructive",
@@ -135,7 +128,7 @@ const AddBanner = () => {
         <div className="w-full bg-white h-[60px] p-5 flex items-center border-[#eee] border-b-[1px]">
           <div className="w-fit flex  h-[60px]">
             <Link
-              href={`/admin/banner?q=${user?.token}`}
+              href={`/admin/product?q=${user?.token}`}
               className="border-r-[1px] border-[#eee] w-fit flex items-center pr-5"
             >
               <ChevronLeft size={30} />
@@ -144,7 +137,7 @@ const AddBanner = () => {
         </div>
         <div className="w-full my-5 bg-[whitesmoke] px-5 flex flex-col h-screen ">
           <div className="p-5">
-            <h1 className={cn(`font-bold`)}>Add new Banner</h1>
+            <h1 className={cn(`font-bold`)}>Add new product</h1>
           </div>
           <div className="p-5 bg-white container w-full">
             <Form {...form}>
@@ -154,59 +147,45 @@ const AddBanner = () => {
               >
                 <FormField
                   control={form.control}
-                  name="description"
+                  name="product_title"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Description</FormLabel>
+                      <FormLabel>Product Title</FormLabel>
                       <FormControl>
                         <Input
-                          placeholder="Description"
+                          placeholder="Product Title"
                           {...field}
                           className="form-input"
                         />
                       </FormControl>
                       <FormDescription className="text-[12px] text-[#333]">
-                        Give this banner a description.
+                        Give this product a title.
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="product_description"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Product Description</FormLabel>
+                      <FormControl>
+                        <Textarea
+                          placeholder="Product Description"
+                          {...field}
+                          className="form-input"
+                        />
+                      </FormControl>
+                      <FormDescription className="text-[12px] text-[#333]">
+                        Give this product a detailed description.
                       </FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
 
-                <FormField
-                  control={form.control}
-                  name="banner_position"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Position</FormLabel>
-                      <Select
-                        onValueChange={field.onChange}
-                        defaultValue={field.value}
-                      >
-                        <FormControl>
-                          <SelectTrigger>
-                            <SelectValue placeholder="select banner position" />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                          <SelectItem value="1">1</SelectItem>
-                          <SelectItem value="2">2</SelectItem>
-                          <SelectItem value="3">3</SelectItem>
-                          <SelectItem value="4">4</SelectItem>
-                          <SelectItem value="5">5</SelectItem>
-                          <SelectItem value="6">6</SelectItem>
-                          <SelectItem value="7">7</SelectItem>
-                          <SelectItem value="8">8</SelectItem>
-                          <SelectItem value="9">9</SelectItem>
-                        </SelectContent>
-                      </Select>
-                      <FormDescription className="text-[12px] text-[#333]">
-                        this is the order the banner will appear on the website
-                      </FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
                 <div className="flex flex-col space-y-5">
                   <span>Add Photo</span>
                   <label htmlFor="files" className="w-fit ">
@@ -246,4 +225,4 @@ const AddBanner = () => {
   );
 };
 
-export default AddBanner;
+export default AddProduct;
