@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { handleDeleteBtn } from "@/utils/deleteItemFromDb";
@@ -90,7 +92,7 @@ export const BannerColumns = [
           >
             <DropdownMenuItem className="flex items-center gap-2 cursor-pointer hover:outline-none">
               <Link
-                href={`/admin/banner/${id}/edit`}
+                href={`/admin/banner/edit/${id}`}
                 className="w-full flex justify-start"
               >
                 <Button

@@ -50,6 +50,41 @@ export const POST = async (req) => {
   }
 };
 
+export const PUT = async (req) => {
+  const userAgent = req.headers.get("user-agent");
+  const urlPath = req.headers.get("referer").split(host.host_url)[1];
+  const body = await req.json();
+
+  if (!body?.value || !body?.field || !body.id) {
+    return errorResponse("Please fill out the form.");
+  }
+  try {
+    const updateData = {};
+    if (body.field === "vehicle_name") {
+      updateData[body.field] = body.value;
+      //updateData.slug = generateSlug(body.value);
+    } else if (body.field === "image") {
+      updateData.mediaUrl = body.photos.map((url) => url.secure_url);
+      updateData.imageId = body.photos.map(
+        (url) => url.public_id.split("/")[1]
+      );
+      removeUploadedImage(body.value, "fameRoyal");
+    } else {
+      updateData[body.field] = body.value;
+    }
+
+    await prisma.slider.update({
+      where: { id: body?.id },
+      data: updateData,
+    });
+
+    return successResponse("success");
+  } catch (error) {
+    console.log(error);
+    return errorResponse("Error occurred", 500);
+  }
+};
+
 const isValidRequestBody = (body) => {
   return body.description && body.banner_position;
 };

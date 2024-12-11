@@ -10,7 +10,7 @@ export const GET = async (req, { params }) => {
   const urlPath = req.headers.get("referer").split(host.host_url)[1];
   try {
     //    check if a record exist with the slug
-    const itemExist = await prisma.vehicleInfo.findUnique({
+    const itemExist = await prisma.slider.findUnique({
       where: {
         id: params.id,
       },

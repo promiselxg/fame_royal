@@ -1,8 +1,9 @@
 /* eslint-disable no-unused-vars */
 
 "use client";
-import SelectedImagesDisplay from "@/components/image-upload/selectedImageDisplay";
-import "../../admin.css";
+
+import { renderImages } from "@/app/admin/_components/image-upload/selectedImageDisplay";
+import "../../../admin.css";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -22,19 +23,21 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useImageContext } from "@/context/imageUpload.context";
-import { useToast } from "@/hooks/use-toast";
-import { __, cn } from "@/lib/utils";
-import { handleFormUpdate } from "@/utils/handleFormUpdate";
-import { config } from "@/utils/headerConfig";
-import host from "@/utils/host";
-import { uploadFilesToCloudinary } from "@/utils/uploadFilesToCloudinary";
+
+import { cn } from "@/lib/utils";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { ChevronLeft, CloudUpload, X } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link, useParams } from "react-router-dom";
+
 import { z } from "zod";
+import { useToast } from "@/components/ui/use-toast";
+import { handleFormUpdate } from "@/utils/handleFormUpdate";
+import Link from "next/link";
+import { __ } from "@/utils/getElementById";
+import { uploadFilesToCloudinary } from "@/utils/uploadFilesToCloudinary";
 
 const formSchema = z.object({
   description: z
@@ -43,41 +46,31 @@ const formSchema = z.object({
   banner_position: z.string({ required_error: "This field is required" }),
 });
 
-const EditBannerPage = () => {
-  const params = useParams();
+const EditBannerPage = ({ params }) => {
   const { files, selectedImages, handleImageChange, removeSelectedImage } =
     useImageContext();
-  const [data, setData] = useState({
-    description: "",
-    banner_position: "",
-    imageUrl: "",
-  });
-
+  const [data, setData] = useState([]);
   const { toast } = useToast();
   const form = useForm({
     resolver: zodResolver(formSchema),
   });
 
-  const handleImageUpload = async (field) => {
+  const handleImageUpload = async (field, value) => {
     try {
-      __(field).innerHTML = "Updating...";
-      __(field).disabled = true;
+      __("submitBtn").innerHTML = "Updating...";
+      __("submitBtn").disabled = true;
       let photos = [];
       if (selectedImages.length > 0 && files) {
-        photos = await uploadFilesToCloudinary(files, "hrcImages");
+        photos = await uploadFilesToCloudinary(files, "fameRoyal");
       }
       if (photos) {
-        const { data } = await axios.put(
-          `${host.url}/banner/${params.id}`,
-          {
-            id: params.id,
-            field: "image",
-            photos,
-            model: "banner",
-          },
-          config
-        );
-        if (data.status === "success") {
+        const response = await axios.put(`/api/banner`, {
+          id: params.id,
+          field,
+          value,
+          photos,
+        });
+        if (response?.data?.message === "success") {
           toast({
             description: `Updated successfully.`,
             className: "bg-green-500 text-white",
@@ -90,23 +83,16 @@ const EditBannerPage = () => {
     } catch (error) {
       console.error(error);
     } finally {
-      __(field).innerHTML = "Update";
-      __(field).disabled = false;
+      __("submitBtn").innerHTML = "Update";
+      __("submitBtn").disabled = false;
     }
-  };
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setData((prev) => ({ ...prev, [name]: value }));
   };
 
   useEffect(() => {
     const getBannerData = async () => {
       try {
-        const response = await axios.get(
-          `${host.url}/banner/${params.id}/banner`
-        );
-        setData(response.data?.data || {});
+        const { data } = await axios.get(`/api/banner/${params?.id}`);
+        setData(data || {});
       } catch (error) {
         console.log(error);
       }
@@ -115,13 +101,14 @@ const EditBannerPage = () => {
   }, [params.id]);
 
   async function onSubmit(values) {}
+
   return (
     <>
       <div className="h-screen w-full flex flex-col  overflow-y-scroll pb-[100px] md:pb-20">
         <div className="w-full bg-white h-[60px] p-5 flex items-center border-[#eee] border-b-[1px]">
           <div className="w-fit flex  h-[60px]">
             <Link
-              to={`/admin/banner`}
+              href={`/admin/banner`}
               className="border-r-[1px] border-[#eee] w-fit flex items-center pr-5"
             >
               <ChevronLeft size={30} />
@@ -148,11 +135,7 @@ const EditBannerPage = () => {
                         <Input
                           placeholder="Description"
                           {...field}
-                          value={data?.description}
-                          onChange={(e) => {
-                            handleInputChange(e);
-                            field.onChange(e);
-                          }}
+                          defaultValue={data?.description}
                           className="form-input"
                         />
                       </FormControl>
@@ -166,10 +149,9 @@ const EditBannerPage = () => {
                         onClick={() =>
                           handleFormUpdate(
                             "description",
-                            params.id,
-                            data.description,
-                            `banner/${params.id}`,
-                            "banner"
+                            field?.value,
+                            "banner",
+                            params.id
                           )
                         }
                       >
@@ -183,66 +165,55 @@ const EditBannerPage = () => {
                   control={form.control}
                   name="banner_position"
                   render={({ field }) => {
-                    const handleChange = (value) => {
-                      field.onChange(value);
-                      handleInputChange({
-                        target: { name: "banner_position", value },
-                      });
-                    };
-
-                    return (
-                      <FormItem>
-                        <FormLabel>Banner position</FormLabel>
-                        <Select
-                          onValueChange={handleChange}
-                          value={field.value}
-                        >
-                          <FormControl>
-                            <SelectTrigger>
-                              <SelectValue
-                                placeholder={
-                                  data?.banner_position
-                                    ? data.banner_position
-                                    : "select banner position"
-                                }
-                              />
-                            </SelectTrigger>
-                          </FormControl>
-                          <SelectContent>
-                            <SelectItem value="1">1</SelectItem>
-                            <SelectItem value="2">2</SelectItem>
-                            <SelectItem value="3">3</SelectItem>
-                            <SelectItem value="4">4</SelectItem>
-                            <SelectItem value="5">5</SelectItem>
-                            <SelectItem value="6">6</SelectItem>
-                            <SelectItem value="7">7</SelectItem>
-                            <SelectItem value="8">8</SelectItem>
-                            <SelectItem value="9">9</SelectItem>
-                          </SelectContent>
-                        </Select>
-                        <FormDescription className="text-[12px] text-[#333]">
-                          this is the order the banner will appear on the
-                          website
-                        </FormDescription>
-                        <Button
-                          type="button"
-                          disabled={!field.value}
-                          id="banner_position"
-                          onClick={() =>
-                            handleFormUpdate(
-                              "banner_position",
-                              params.id,
-                              data.banner_position,
-                              `team/${params.id}`,
-                              "banner"
-                            )
-                          }
-                        >
-                          Update
-                        </Button>
-                        <FormMessage />
-                      </FormItem>
-                    );
+                    <FormItem>
+                      <FormLabel>Banner position</FormLabel>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue
+                              placeholder={
+                                data?.banner_position
+                                  ? data.banner_position
+                                  : "select banner position"
+                              }
+                            />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="1">1</SelectItem>
+                          <SelectItem value="2">2</SelectItem>
+                          <SelectItem value="3">3</SelectItem>
+                          <SelectItem value="4">4</SelectItem>
+                          <SelectItem value="5">5</SelectItem>
+                          <SelectItem value="6">6</SelectItem>
+                          <SelectItem value="7">7</SelectItem>
+                          <SelectItem value="8">8</SelectItem>
+                          <SelectItem value="9">9</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <FormDescription className="text-[12px] text-[#333]">
+                        this is the order the banner will appear on the website
+                      </FormDescription>
+                      <Button
+                        type="button"
+                        disabled={!field.value}
+                        id="banner_position"
+                        onClick={() =>
+                          handleFormUpdate(
+                            "banner_position",
+                            field?.value,
+                            "banner",
+                            params.id
+                          )
+                        }
+                      >
+                        Update
+                      </Button>
+                      <FormMessage />
+                    </FormItem>;
                   }}
                 />
                 <div className="flex flex-col space-y-5">
@@ -264,20 +235,19 @@ const EditBannerPage = () => {
                   />
 
                   <div className="w-fit grid md:grid-cols-10 grid-cols-3 gap-3">
-                    <SelectedImagesDisplay
-                      images={
-                        selectedImages.length > 0
-                          ? selectedImages
-                          : data?.imageUrl
-                      }
-                      onRemoveImage={removeSelectedImage}
-                    />
+                    {selectedImages.length > 0
+                      ? renderImages(
+                          selectedImages,
+                          "file",
+                          removeSelectedImage
+                        )
+                      : renderImages(data?.mediaUrl)}
                   </div>
                 </div>
                 <Button
                   type="button"
                   id="submitBtn"
-                  onClick={() => handleImageUpload("submitBtn")}
+                  onClick={() => handleImageUpload("image", data?.imageId)}
                   disabled={selectedImages.length < 1 || !files}
                 >
                   Update

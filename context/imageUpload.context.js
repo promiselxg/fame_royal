@@ -46,7 +46,8 @@ export const ImageProvider = ({ children }) => {
 
     // Update state with valid files and their preview URLs
     setFiles(selectedFiles);
-    setSelectedImages((prevImages) => prevImages.concat(filesArray));
+    const fileArray = selectedFiles.map((file) => URL.createObjectURL(file));
+    setSelectedImages((prevImages) => prevImages.concat(fileArray));
 
     // Revoke object URLs to free memory
     fileURLs.forEach(URL.revokeObjectURL);

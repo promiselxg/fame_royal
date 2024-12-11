@@ -8,15 +8,13 @@ cloudinary.v2.config({
 
 //  Remove uploaded image function
 const removeUploadedImage = async (imageArray, preset) => {
-  console.log(imageArray, preset);
-
   const publicIds = imageArray.map((img) => `${preset}/${img}`);
   try {
     const result = await cloudinary.v2.api.delete_resources(publicIds, {
       type: "upload",
       resource_type: "image",
     });
-    console.log("image delete error ", result);
+    console.log("image delete response ", result);
     return result;
   } catch (error) {
     console.log(error.error.message);

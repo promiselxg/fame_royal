@@ -31,37 +31,50 @@ import Image from "next/image";
 //   );
 // };
 
-const SelectedImagesDisplay = ({ images, onRemoveImage }) => {
-  const renderImage = (image, index) => {
-    const imageSrc =
-      typeof image === "string" ? image : URL.createObjectURL(image);
-    return (
-      <div
-        className="w-fit h-[60px] rounded-md relative mb-5 bg-contain"
-        key={index}
-      >
+const SelectedImagesDisplay = ({ source, onRemoveImage }) => {
+  return source?.map((image, i) => (
+    <div
+      className="w-full h-[60px] rounded-md relative mb-5   bg-contain"
+      key={i}
+    >
+      {type === "file" && (
         <X
-          className="absolute -top-2 -right-2 bg-[rgba(0,0,0,0.9)] rounded-full text-white p-[5px] cursor-pointer"
-          onClick={() => onRemoveImage(index)}
+          className="absolute -top-2 -right-2 bg-[rgba(0,0,0,0.9)] rounded-full text-white p-[5px]  cursor-pointer"
+          onClick={() => onRemoveImage(i)}
         />
-        <Image
-          src={imageSrc}
-          alt={`Selected image ${index}`}
-          width={100}
-          height={60}
-          className="object-contain h-[60px] w-auto"
-        />
-      </div>
-    );
-  };
+      )}
+      <Image
+        src={image}
+        alt={`images ${i}`}
+        width={200}
+        height={100}
+        className="object-contain h-[60px]"
+      />
+    </div>
+  ));
+};
 
-  return (
-    <>
-      {Array.isArray(images)
-        ? images.map((image, index) => renderImage(image, index))
-        : renderImage(images, 0)}{" "}
-    </>
-  );
+export const renderImages = (source, type, onRemoveImage) => {
+  return source?.map((image, i) => (
+    <div
+      className="w-full h-[60px] rounded-md relative mb-5   bg-contain"
+      key={i}
+    >
+      {type === "file" && (
+        <X
+          className="absolute -top-2 -right-2 bg-[rgba(0,0,0,0.9)] rounded-full text-white p-[5px]  cursor-pointer"
+          onClick={() => onRemoveImage(i)}
+        />
+      )}
+      <Image
+        src={image}
+        alt={`images ${i}`}
+        width={200}
+        height={100}
+        className="object-contain h-[60px]"
+      />
+    </div>
+  ));
 };
 
 export default SelectedImagesDisplay;
