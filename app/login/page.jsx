@@ -5,6 +5,8 @@ import Image from "next/image";
 import { useToast } from "@/components/ui/use-toast";
 import { __ } from "@/utils/getElementById";
 import AuthContext from "@/context/authContext";
+import { Button } from "@/components/ui/button";
+import { Loader2 } from "lucide-react";
 
 const Page = () => {
   const { toast } = useToast();
@@ -30,7 +32,6 @@ const Page = () => {
     }
     try {
       setLoading(true);
-      __("submitBtn").innerHTML = "Authenticating...";
       const { data } = await axios.post("/api/auth/login", formData);
       if (data?.message !== "Login Successful") {
         toast({
@@ -50,7 +51,6 @@ const Page = () => {
       });
     } finally {
       setLoading(false);
-      __("submitBtn").innerHTML = "Login";
     }
   };
 
@@ -91,9 +91,10 @@ const Page = () => {
               disabled={isloading}
               type="submit"
               id="submitBtn"
-              className="border-none outline-none bg-[--admin-primary-bg] p-3 rounded-md uppercase text-white font-[600] hover:opacity-[0.8] transition-all delay-75 hover:text-[#000]  disabled:cursor-not-allowed mt-5"
+              className="border-none outline-none bg-[--admin-primary-bg] p-3 rounded-md  text-white font-[600] hover:opacity-[0.8] transition-all delay-75 disabled:cursor-not-allowed mt-5 flex items-center text-center justify-center gap-2"
             >
-              Login
+              {isloading ? <Loader2 className="animate-spin" /> : null}
+              {isloading ? "please wait..." : "Login"}
             </button>
           </form>
         </div>
