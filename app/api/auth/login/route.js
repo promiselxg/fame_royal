@@ -4,33 +4,34 @@ import { generateCookieResponse } from "@/utils/authUtils";
 import prisma from "@/utils/dbConnect";
 
 export const POST = async (req) => {
-  const { username, password } = await req.json();
-  const userN = username.toLowerCase();
-  //  check user credentials
-  if (!userN || !password) {
-    return new NextResponse(
-      JSON.stringify(
+  try {
+    const { username, password } = await req.json();
+    const userN = username?.toLowerCase();
+
+    // Check if username and password are provided
+    if (!userN || !password) {
+      return NextResponse.json(
         { message: "Please enter your username or password." },
         { status: 400 }
-      )
-    );
-  }
-  const user = await prisma.registeredUser.findUnique({
-    where: {
-      username: userN,
-    },
-  });
+      );
+    }
 
-  if (user && (await bcrypt.compare(password, user.password))) {
-    const roles = Object.values(user.role);
-    const token = await generateCookieResponse(
-      user.id,
-      roles,
-      user.admin,
-      userN
-    );
-    return new NextResponse(
-      JSON.stringify(
+    // Find user in the database
+    const user = await prisma.registeredUser.findUnique({
+      where: { username: userN },
+    });
+
+    // Check if user exists and password matches
+    if (user && (await bcrypt.compare(password, user.password))) {
+      const roles = Object.values(user.role);
+      const token = await generateCookieResponse(
+        user.id,
+        roles,
+        user.admin,
+        userN
+      );
+
+      return NextResponse.json(
         {
           message: "Login Successful",
           userInfo: {
@@ -40,15 +41,19 @@ export const POST = async (req) => {
             username: userN,
           },
         },
-        { status: 400 }
-      )
-    );
-  } else {
-    return new NextResponse(
-      JSON.stringify(
+        { status: 200 }
+      );
+    } else {
+      return NextResponse.json(
         { message: "Incorrect username or password." },
         { status: 400 }
-      )
+      );
+    }
+  } catch (error) {
+    console.error("Error in login handler:", error);
+    return NextResponse.json(
+      { message: "An unexpected error occurred. Please try again later." },
+      { status: 500 }
     );
   }
 };
