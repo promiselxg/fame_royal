@@ -27,13 +27,11 @@ import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const formSchema = z.object({
-  destination_title: z.string({ required_error: "This field is required" }),
-  destination_description: z.string({
-    required_error: "This field is required",
-  }),
+  question: z.string({ required_error: "This field is required" }),
+  answer: z.string({ required_error: "This field is required" }),
 });
 
-export function DestinationTable({ columns, data, loading }) {
+export function FAQTable({ columns, data, loading }) {
   const [columnFilters, setColumnFilters] = useState([]);
   const [sorting, setSorting] = useState([]);
 
@@ -65,11 +63,9 @@ export function DestinationTable({ columns, data, loading }) {
       <div className="flex items-center  py-4 justify-between w-full flex-col md:flex-row space-y-3">
         <Input
           placeholder="Search Table"
-          value={table.getColumn("destination_title")?.getFilterValue() ?? ""}
+          value={table.getColumn("question")?.getFilterValue() ?? ""}
           onChange={(event) =>
-            table
-              .getColumn("destination_title")
-              ?.setFilterValue(event.target.value)
+            table.getColumn("question")?.setFilterValue(event.target.value)
           }
           className="md:w-2/6 w-full"
         />
