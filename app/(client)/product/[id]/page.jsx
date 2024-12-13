@@ -5,8 +5,14 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { FiMail, FiPhone } from "react-icons/fi";
 import { useEffect } from "react";
+import useFetch from "@/hooks/useFetch";
 
-const ProductDetails = () => {
+const ProductDetails = ({ params }) => {
+  const { error, data } = useFetch(`/product/${params?.id}`);
+  if (error) {
+    redirect("/product");
+  }
+
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -16,7 +22,12 @@ const ProductDetails = () => {
   return (
     <>
       <div className="w-full">
-        <div className="bg-tour-bg w-full h-[300px] bg-cover bg-fixed bg-no-repeat flex md:items-end items-center justify-center pb-[80px] relative">
+        <div
+          className="w-full h-[300px] bg-cover bg-fixed bg-no-repeat flex md:items-end items-center justify-center pb-[80px] relative"
+          style={{
+            backgroundImage: `url(${data?.mediaUrl?.[0] || ""})`,
+          }}
+        >
           <div className="absolute top-0 bottom-0 w-full bg-[rgba(0,0,0,0.5)]"></div>
           <div
             className={cn(
@@ -29,7 +40,7 @@ const ProductDetails = () => {
                 `${playfair.className} text-[40px] text-white font-[900] leading-[1.1]`
               )}
             >
-              Products Details Page
+              {data?.product_title}
             </h1>
           </div>
         </div>
@@ -40,22 +51,16 @@ const ProductDetails = () => {
                 `${playfair.className} text-[40px] font-[900] pb-[20px]`
               )}
             >
-              Products Details Page
+              {data?.product_title}
             </h2>
             <Image
-              src="/img/about-us.jpg"
+              src={data?.mediaUrl?.[0]}
               width={1000}
               height={500}
-              alt="product details"
+              alt={data?.product_tile}
             />
             <div className="py-8">
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque
-                eos quo minus laborum architecto provident dicta et non, ipsa
-                soluta veritatis fuga enim fugiat eligendi qui aspernatur animi,
-                accusamus sapiente molestias. Facilis aperiam nulla vero et,
-                fugit incidunt. Consectetur, voluptatem?
-              </p>
+              <p>{data?.product_description}</p>
             </div>
           </div>
           <div

@@ -9,8 +9,12 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import useFetch from "@/hooks/useFetch";
+import SkeletonLoader from "../_components/Loader";
 
 const FAQ = () => {
+  const { loading, data } = useFetch("/faq");
+
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -44,44 +48,22 @@ const FAQ = () => {
             </h2>
             <div className="md:py-10">
               <Accordion type="single" collapsible className="w-full">
-                <AccordionItem value="item-1">
-                  <AccordionTrigger
-                    className={cn(
-                      `${work_sans.className} md:text-[20px] font-[600] text-left leading-[1.1]`
-                    )}
-                  >
-                    Which payment methods are acceptable?
-                  </AccordionTrigger>
-                  <AccordionContent>
-                    Yes. It adheres to the WAI-ARIA design pattern.
-                  </AccordionContent>
-                </AccordionItem>
-                <AccordionItem value="item-2">
-                  <AccordionTrigger
-                    className={cn(
-                      `${work_sans.className} md:text-[20px] font-[600] text-left leading-[1.1]`
-                    )}
-                  >
-                    Refund Policy
-                  </AccordionTrigger>
-                  <AccordionContent>
-                    Yes. It comes with default styles that matches the other
-                    components&apos; aesthetic.
-                  </AccordionContent>
-                </AccordionItem>
-                <AccordionItem value="item-3">
-                  <AccordionTrigger
-                    className={cn(
-                      `${work_sans.className} md:text-[20px] font-[600] text-left leading-[1.1]`
-                    )}
-                  >
-                    Countries we cover
-                  </AccordionTrigger>
-                  <AccordionContent>
-                    Yes. It&apos;s animated by default, but you can disable it
-                    if you prefer.
-                  </AccordionContent>
-                </AccordionItem>
+                {loading ? (
+                  <SkeletonLoader />
+                ) : (
+                  data?.map((faq) => (
+                    <AccordionItem value={faq.id} key={faq.id}>
+                      <AccordionTrigger
+                        className={cn(
+                          `${work_sans.className} md:text-[20px] font-[600] text-left leading-[1.1]`
+                        )}
+                      >
+                        {faq?.question}
+                      </AccordionTrigger>
+                      <AccordionContent>{faq?.answer}</AccordionContent>
+                    </AccordionItem>
+                  ))
+                )}
               </Accordion>
             </div>
           </div>

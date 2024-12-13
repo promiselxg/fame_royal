@@ -1,4 +1,5 @@
 "use client";
+import useFetch from "@/hooks/useFetch";
 import { playfair, work_sans } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
 import Tawk from "@/utils/tawk";
@@ -17,6 +18,7 @@ import {
 } from "react-icons/fi";
 
 const Footer = () => {
+  const { data } = useFetch("/gallary");
   return (
     <>
       <footer className="w-full flex relative bg-[rgba(0,0,0,0.9)] ">
@@ -120,54 +122,20 @@ const Footer = () => {
                 Gallery
               </h1>
               <div className="grid grid-cols-3 gap-3 w-full">
-                <Link href="/" className="rounded-[5px] overflow-hidden w-fit">
-                  <Image
-                    src="https://travio.smartdemowp.com/wp-content/uploads/2021/02/footer-gallery-1.jpg"
-                    width={100}
-                    height={100}
-                    alt="gallery"
-                  />
-                </Link>
-                <Link href="/" className="rounded-[5px] overflow-hidden w-fit">
-                  <Image
-                    src="https://travio.smartdemowp.com/wp-content/uploads/2021/02/footer-gallery-1.jpg"
-                    width={100}
-                    height={100}
-                    alt="gallery"
-                  />
-                </Link>
-                <Link href="/" className="rounded-[5px] overflow-hidden w-fit">
-                  <Image
-                    src="https://travio.smartdemowp.com/wp-content/uploads/2021/02/footer-gallery-1.jpg"
-                    width={100}
-                    height={100}
-                    alt="gallery"
-                  />
-                </Link>
-                <Link href="/" className="rounded-[5px] overflow-hidden w-fit">
-                  <Image
-                    src="https://travio.smartdemowp.com/wp-content/uploads/2021/02/footer-gallery-1.jpg"
-                    width={100}
-                    height={100}
-                    alt="gallery"
-                  />
-                </Link>
-                <Link href="/" className="rounded-[5px] overflow-hidden w-fit">
-                  <Image
-                    src="https://travio.smartdemowp.com/wp-content/uploads/2021/02/footer-gallery-1.jpg"
-                    width={100}
-                    height={100}
-                    alt="gallery"
-                  />
-                </Link>
-                <Link href="/" className="rounded-[5px] overflow-hidden w-fit">
-                  <Image
-                    src="https://travio.smartdemowp.com/wp-content/uploads/2021/02/footer-gallery-1.jpg"
-                    width={100}
-                    height={100}
-                    alt="gallery"
-                  />
-                </Link>
+                {data?.slice(0, 6).map((gallery) => (
+                  <Link
+                    href="#"
+                    className="rounded-[5px] overflow-hidden w-fit"
+                    key={gallery?.id}
+                  >
+                    <Image
+                      src={gallery?.mediaUrl?.[0]}
+                      width={100}
+                      height={100}
+                      alt={gallery?.gallary_title}
+                    />
+                  </Link>
+                ))}
               </div>
             </div>
             <div className="flex flex-col gap-y-4 md:ml-[20px]">

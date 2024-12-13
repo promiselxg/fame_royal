@@ -12,8 +12,10 @@ import WhyUs from "../_components/whyUs";
 import Services from "../_components/ourServices";
 import Products from "../_components/products";
 import HighlightDestination from "../_components/highlightDestination";
+import useFetch from "@/hooks/useFetch";
 
 export default function Home() {
+  const { data } = useFetch("/destination");
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -135,116 +137,33 @@ export default function Home() {
               Destinations.
             </h2>
           </div>
-          <div className="w-full md:w-[300px] md:min-w-[380px] z-10">
-            <Link href="/">
-              <div className="w-full bg-white p-2 boxShadow rounded-[5px] md:flex flex-col justify-center h-[365px] relative deals-section zoom-in">
-                <Image
-                  src="https://travio.smartdemowp.com/wp-content/uploads/2021/02/about-1.jpg"
-                  width={300}
-                  height={300}
-                  alt="about us"
-                  className="bg-cover w-full h-[350px]"
-                />
-                <div className="absolute bottom-5 left-5">
-                  <h1
-                    className={cn(
-                      `${work_sans.className} text-[whitesmoke] font-[600] text-[20px]`
-                    )}
-                  >
-                    Singapore
-                  </h1>
+          {data?.slice(0, 5)?.map((destination) => (
+            <div
+              className="w-full md:w-[300px] md:min-w-[380px] z-10"
+              key={destination.id}
+            >
+              <Link href="#">
+                <div className="w-full bg-white p-2 boxShadow rounded-[5px] md:flex flex-col justify-center h-[365px] relative deals-section zoom-in">
+                  <Image
+                    src={destination?.mediaUrl?.[0]}
+                    width={300}
+                    height={300}
+                    alt={destination?.destination_title}
+                    className="bg-cover w-full h-[350px]"
+                  />
+                  <div className="absolute bottom-5 left-5">
+                    <h1
+                      className={cn(
+                        `${work_sans.className} text-[whitesmoke] font-[600] text-[20px]`
+                      )}
+                    >
+                      {destination?.destination_title}
+                    </h1>
+                  </div>
                 </div>
-              </div>
-            </Link>
-          </div>
-          <div className="w-full md:w-[300px] md:min-w-[380px] z-10">
-            <Link href="/">
-              <div className="w-full bg-white p-2 boxShadow rounded-[5px] md:flex flex-col justify-center h-[365px] relative deals-section zoom-in">
-                <Image
-                  src="https://travio.smartdemowp.com/wp-content/uploads/2021/02/place-4.jpg"
-                  width={300}
-                  height={300}
-                  alt="about us"
-                  className="bg-cover w-full h-[350px]"
-                />
-                <div className="absolute bottom-5 left-5">
-                  <h1
-                    className={cn(
-                      `${work_sans.className} text-[whitesmoke] font-[600] text-[20px]`
-                    )}
-                  >
-                    Vietnam
-                  </h1>
-                </div>
-              </div>
-            </Link>
-          </div>
-          <div className="w-full md:w-[300px] md:min-w-[380px] z-10">
-            <Link href="/">
-              <div className="w-full bg-white p-2 boxShadow rounded-[5px] md:flex flex-col justify-center h-[365px] relative deals-section zoom-in">
-                <Image
-                  src="https://travio.smartdemowp.com/wp-content/uploads/2021/02/place-3.jpg"
-                  width={300}
-                  height={300}
-                  alt="about us"
-                  className="bg-cover w-full h-[350px]"
-                />
-                <div className="absolute bottom-5 left-5">
-                  <h1
-                    className={cn(
-                      `${work_sans.className} text-[whitesmoke] font-[600] text-[20px]`
-                    )}
-                  >
-                    Dubai
-                  </h1>
-                </div>
-              </div>
-            </Link>
-          </div>
-          <div className="w-full md:w-[300px] md:min-w-[380px] z-10">
-            <Link href="/">
-              <div className="w-full bg-white p-2 boxShadow rounded-[5px] md:flex flex-col justify-center h-[365px] relative deals-section zoom-in">
-                <Image
-                  src="https://travio.smartdemowp.com/wp-content/uploads/2021/02/place-2.jpg"
-                  width={300}
-                  height={300}
-                  alt="about us"
-                  className="bg-cover w-full h-[350px]"
-                />
-                <div className="absolute bottom-5 left-5">
-                  <h1
-                    className={cn(
-                      `${work_sans.className} text-[whitesmoke] font-[600] text-[20px]`
-                    )}
-                  >
-                    UK
-                  </h1>
-                </div>
-              </div>
-            </Link>
-          </div>
-          <div className="w-full md:w-[300px] md:min-w-[380px] z-10">
-            <Link href="/">
-              <div className="w-full bg-white p-2 boxShadow rounded-[5px] md:flex flex-col justify-center h-[365px] relative deals-section zoom-in">
-                <Image
-                  src="https://travio.smartdemowp.com/wp-content/uploads/2021/02/place-1.jpg"
-                  width={300}
-                  height={300}
-                  alt="about us"
-                  className="bg-cover w-full h-[350px]"
-                />
-                <div className="absolute bottom-5 left-5">
-                  <h1
-                    className={cn(
-                      `${work_sans.className} text-[whitesmoke] font-[600] text-[20px] z-10`
-                    )}
-                  >
-                    Spain
-                  </h1>
-                </div>
-              </div>
-            </Link>
-          </div>
+              </Link>
+            </div>
+          ))}
         </div>
       </section>
     </main>

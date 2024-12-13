@@ -5,8 +5,11 @@ import Breadcrumb from "../_components/breadcrumb";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect } from "react";
+import useFetch from "@/hooks/useFetch";
+import SkeletonLoader from "../_components/Loader";
 
 const ProductsPage = () => {
+  const { loading, data } = useFetch("/product");
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -40,101 +43,46 @@ const ProductsPage = () => {
                 Our Products.
               </h2>
               <div className="grid w-full md:grid-cols-3 grid-cols-1 gap-5 z-10">
-                <Link href="/product/product-name">
-                  <div className="bg-white md:min-w-[300px] boxShadow rounded-[5px]  overflow-hidden">
-                    <div className="w-full h-[280px] overflow-hidden">
-                      <Image
-                        src="https://travio.smartdemowp.com/wp-content/uploads/2021/02/tour-1.jpg"
-                        width={300}
-                        height={300}
-                        alt="tour 1"
-                        className="w-full bg-cover h-[280px]"
-                      />
-                    </div>
-                    <div className="p-5">
-                      <span className="py-2">
-                        <h1
-                          className={cn(
-                            `${work_sans.className} text-[17px] font-[600]`
-                          )}
-                        >
-                          Moscow Red City Land
-                        </h1>
-                      </span>
-                      <div className="py-4">
-                        <p className={cn(`${work_sans.className} text-[15px]`)}>
-                          Lorem ipsum dolor amet consectetur adipiscing sed do
-                          eiusmod tempor incididunt.
-                        </p>
+                {loading ? (
+                  <SkeletonLoader />
+                ) : (
+                  data?.map((product) => (
+                    <Link href={`/product/${product?.id}`} key={product?.id}>
+                      <div className="bg-white md:min-w-[300px] boxShadow rounded-[5px]  overflow-hidden">
+                        <div className="w-full h-[280px] overflow-hidden">
+                          <Image
+                            src={product?.mediaUrl?.[0]}
+                            width={300}
+                            height={300}
+                            alt={product?.product_title}
+                            className="w-full bg-cover h-[280px]"
+                          />
+                        </div>
+                        <div className="p-5">
+                          <span className="py-2">
+                            <h1
+                              className={cn(
+                                `${work_sans.className} text-[17px] font-[600]`
+                              )}
+                            >
+                              {product?.product_title}
+                            </h1>
+                          </span>
+                          <div className="py-4">
+                            <p
+                              className={cn(
+                                `${work_sans.className} text-[15px]`
+                              )}
+                            >
+                              {product?.product_description}
+                            </p>
+                          </div>
+                          <div className="pb-8"></div>
+                        </div>
                       </div>
-                      <div className="pb-8"></div>
-                    </div>
-                  </div>
-                </Link>
-                <Link href="/product/product-name">
-                  <div className="bg-white w-full md:min-w-[300px] boxShadow rounded-[5px] overflow-hidden">
-                    <div className="w-full h-[280px] overflow-hidden">
-                      <Image
-                        src="https://travio.smartdemowp.com/wp-content/uploads/2021/02/tour-1.jpg"
-                        width={300}
-                        height={300}
-                        alt="tour 1"
-                        className="w-full bg-cover h-[280px]"
-                      />
-                    </div>
-                    <div className="p-5">
-                      <span className="py-2">
-                        <h1
-                          className={cn(
-                            `${work_sans.className} text-[17px] font-[600]`
-                          )}
-                        >
-                          Moscow Red City Land
-                        </h1>
-                      </span>
-                      <div className="py-4">
-                        <p className={cn(`${work_sans.className} text-[15px]`)}>
-                          Lorem ipsum dolor amet consectetur adipiscing sed do
-                          eiusmod tempor incididunt.
-                        </p>
-                      </div>
-
-                      <div className="pb-8"></div>
-                    </div>
-                  </div>
-                </Link>
-                <Link href="/product/product-name">
-                  <div className="bg-white w-full md:min-w-[300px] boxShadow rounded-[5px] overflow-hidden">
-                    <div className="w-full h-[280px] overflow-hidden">
-                      <Image
-                        src="https://travio.smartdemowp.com/wp-content/uploads/2021/02/tour-1.jpg"
-                        width={300}
-                        height={300}
-                        alt="tour 1"
-                        className="w-full bg-cover h-[280px]"
-                      />
-                    </div>
-                    <div className="p-5">
-                      <span className="py-2">
-                        <h1
-                          className={cn(
-                            `${work_sans.className} text-[17px] font-[600]`
-                          )}
-                        >
-                          Moscow Red City Land
-                        </h1>
-                      </span>
-                      <div className="py-4">
-                        <p className={cn(`${work_sans.className} text-[15px]`)}>
-                          Lorem ipsum dolor amet consectetur adipiscing sed do
-                          eiusmod tempor incididunt.
-                        </p>
-                      </div>
-
-                      <div className="pb-8"></div>
-                    </div>
-                  </div>
-                </Link>
+                    </Link>
+                  ))
+                )}
               </div>
             </div>
           </section>

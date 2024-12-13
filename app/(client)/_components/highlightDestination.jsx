@@ -7,12 +7,15 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
+import useFetch from "@/hooks/useFetch";
+import { truncateText } from "@/utils/trucateText";
+import Link from "next/link";
 
 const HighlightDestination = () => {
+  const { data } = useFetch("/tour");
+
   const [api, setApi] = useState();
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
@@ -33,17 +36,11 @@ const HighlightDestination = () => {
     });
   }, [api]);
 
-  const backgroundImages = [
-    "https://res.cloudinary.com/demo/image/upload/v1652345767/docs/demo_image2.jpg",
-    "https://res.cloudinary.com/demo/image/upload/v1652366604/docs/demo_image5.jpg",
-    "https://res.cloudinary.com/demo/image/upload/v1652345874/docs/demo_image1.jpg",
-  ];
-
   return (
     <>
       <section
         style={{
-          backgroundImage: `url(${backgroundImages[current - 1]})`,
+          backgroundImage: `url(${data && data[current - 1]?.mediaUrl?.[0]})`,
         }}
         className={cn(
           `flex md:h-[600px] bg-no-repeat bg-center bg-cover relative py-[150px] px-0 items-center`
@@ -58,8 +55,8 @@ const HighlightDestination = () => {
           onMouseLeave={plugin.current.reset}
         >
           <CarouselContent>
-            {Array.from({ length: 3 }).map((_, index) => (
-              <CarouselItem key={index}>
+            {data?.map((tour) => (
+              <CarouselItem key={tour.id}>
                 <div className="container mx-auto z-10">
                   <div className="max-w-[400px] bg-white p-5 rounded-[5px] boxShadow leading-[1.2] gap-y-2 flex flex-col">
                     <h2
@@ -67,24 +64,24 @@ const HighlightDestination = () => {
                         `${work_sans.className} text-[20px] md:text-[40px] font-[600]`
                       )}
                     >
-                      Group Travel to New Zealand
+                      {tour?.tour_destination}
                     </h2>
                     <p
                       className={cn(
                         `${work_sans.className} text-sm font-[400]`
                       )}
                     >
-                      Lorem ipsum dolor amet consectetur adipiscing sed do
-                      eiusmod tempor ux incidunt labore dolore magna aliqua Quis
-                      ipsum suspen. bgbd
+                      {truncateText(tour?.tour_description, 200)}
                     </p>
-                    <Button
-                      className={cn(
-                        `${work_sans.className} btn-default bg-[--light-yellow-text] hover:bg-[--btn-hover] py-[17.5px] px-[36px] md:h-[55px] w-fit mt-5`
-                      )}
-                    >
-                      See details
-                    </Button>
+                    <Link href={`/tour/${tour.id}`}>
+                      <Button
+                        className={cn(
+                          `${work_sans.className} btn-default bg-[--light-yellow-text] hover:bg-[--btn-hover] py-[17.5px] px-[36px] md:h-[55px] w-fit mt-5`
+                        )}
+                      >
+                        See details
+                      </Button>
+                    </Link>
                   </div>
                 </div>
               </CarouselItem>

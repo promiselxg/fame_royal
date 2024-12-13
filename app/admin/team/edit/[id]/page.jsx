@@ -35,6 +35,9 @@ import { uploadFilesToCloudinary } from "@/utils/uploadFilesToCloudinary";
 const formSchema = z.object({
   team_name: z.string({ required_error: "This field is required" }),
   position: z.string({ required_error: "This field is required" }),
+  facebook_url: z.string().optional(),
+  instagram_url: z.string().optional(),
+  twitter_url: z.string().optional(),
 });
 
 const EditTeamMember = ({ params }) => {
@@ -93,6 +96,7 @@ const EditTeamMember = ({ params }) => {
 
   async function onSubmit(values) {}
 
+  console.log(data);
   return (
     <>
       <div className="h-screen w-full flex flex-col  overflow-y-scroll pb-[100px] md:pb-20">
@@ -108,7 +112,7 @@ const EditTeamMember = ({ params }) => {
         </div>
         <div className="w-full my-5 bg-[whitesmoke] px-5 flex flex-col h-screen ">
           <div className="p-5">
-            <h1 className={cn(`font-bold`)}>Edit Banner</h1>
+            <h1 className={cn(`font-bold`)}>Edit Team Information</h1>
           </div>
           <div className="p-5 bg-white container w-full">
             <Form {...form}>
@@ -176,6 +180,114 @@ const EditTeamMember = ({ params }) => {
                         onClick={() =>
                           handleFormUpdate(
                             "position",
+                            field?.value,
+                            "team",
+                            params.id
+                          )
+                        }
+                      >
+                        Update
+                      </Button>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="facebook_url"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Facebook Username (optional)</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="Facebook Username"
+                          {...field}
+                          defaultValue={data?.social?.facebook_url}
+                          className="form-input"
+                        />
+                      </FormControl>
+                      <FormDescription className="text-[12px] text-[#333]">
+                        Facebook Profile Address (https://www.facebook.com/)
+                      </FormDescription>
+                      <Button
+                        type="button"
+                        disabled={!field.value}
+                        id="facebook_url"
+                        onClick={() =>
+                          handleFormUpdate(
+                            "facebook_url",
+                            field?.value,
+                            "team",
+                            params.id
+                          )
+                        }
+                      >
+                        Update
+                      </Button>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="instagram_url"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Instagram URL (optional)</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="Instagram URL"
+                          {...field}
+                          defaultValue={data?.social?.instagram_url}
+                          className="form-input"
+                        />
+                      </FormControl>
+                      <FormDescription className="text-[12px] text-[#333]">
+                        Instagram URL
+                      </FormDescription>
+                      <Button
+                        type="button"
+                        disabled={!field.value}
+                        id="instagram_url"
+                        onClick={() =>
+                          handleFormUpdate(
+                            "instagram_url",
+                            field?.value,
+                            "team",
+                            params.id
+                          )
+                        }
+                      >
+                        Update
+                      </Button>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="twitter_url"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Twitter URL (optional)</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="Twitter URL"
+                          {...field}
+                          defaultValue={data?.social?.twitter_url}
+                          className="form-input"
+                        />
+                      </FormControl>
+                      <FormDescription className="text-[12px] text-[#333]">
+                        Twitter URL
+                      </FormDescription>
+                      <Button
+                        type="button"
+                        disabled={!field.value}
+                        id="twitter_url"
+                        onClick={() =>
+                          handleFormUpdate(
+                            "twitter_url",
                             field?.value,
                             "team",
                             params.id

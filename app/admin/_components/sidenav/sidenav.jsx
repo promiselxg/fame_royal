@@ -118,6 +118,20 @@ const SideNav = () => {
                   Services
                 </Link>
               </li>
+              <li
+                className={`${
+                  currentRoute === "/admin/faq" && "active"
+                } my-[2px] h-10 nav`}
+              >
+                <Link
+                  href={`/admin/faq?q=${user?.token}`}
+                  className="flex gap-2 items-center py-2  h-8 leading-tight relative"
+                >
+                  <span className="w-[1px] h-8 rounded-r-[5px] border-r-4 border-transparent"></span>
+                  <LayoutDashboard size={18} />
+                  FAQ
+                </Link>
+              </li>
               <Separator
                 className="my-2 w-full bg-[rgba(255,255,255,0.1)] "
                 orientation="horizontal"
@@ -163,6 +177,20 @@ const SideNav = () => {
                   <span className="w-[1px] h-8 rounded-r-[5px] border-r-4 border-transparent"></span>
                   <LayoutDashboard size={18} />
                   Destination
+                </Link>
+              </li>
+              <li
+                className={`${
+                  currentRoute === "/admin/visa" && "active"
+                } my-[2px] h-10 nav`}
+              >
+                <Link
+                  href={`/admin/visa?q=${user?.token}`}
+                  className="flex gap-2 items-center py-2  h-8 leading-tight relative"
+                >
+                  <span className="w-[1px] h-8 rounded-r-[5px] border-r-4 border-transparent"></span>
+                  <LayoutDashboard size={18} />
+                  Visa Service
                 </Link>
               </li>
               <Separator

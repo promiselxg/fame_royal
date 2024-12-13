@@ -3,7 +3,6 @@
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { handleDeleteBtn } from "@/utils/deleteItemFromDb";
-import { truncateText } from "@/utils/trucateText";
 
 import {
   DropdownMenu,
@@ -16,40 +15,25 @@ import Image from "next/image";
 import Link from "next/link";
 import { FiTrash2 } from "react-icons/fi";
 
-export const ServiceColumn = [
+export const VisaColumn = [
   {
-    accessorKey: "service_title",
-    header: "Title",
+    accessorKey: "via_country_name",
+    header: "Country",
     cell: ({ row }) => {
-      const { service_title } = row.original;
+      const { via_country_name } = row.original;
       return (
         <>
           <div>
-            <h1 className={cn(`text-sm font-[600]`)}>{service_title}</h1>
+            <p className={cn(`text-sm`)}>{via_country_name}</p>
           </div>
         </>
       );
     },
   },
-  {
-    accessorKey: "service_description",
-    header: "Description",
-    cell: ({ row }) => {
-      const { service_description } = row.original;
-      return (
-        <>
-          <div>
-            <p className={cn(`text-sm`)}>
-              {truncateText(service_description, 50)}
-            </p>
-          </div>
-        </>
-      );
-    },
-  },
+
   {
     accessorKey: "imageUrl",
-    header: "Image Thumbnail",
+    header: "Country Flag",
     cell: ({ row }) => {
       const { mediaUrl, id } = row.original;
 
@@ -63,7 +47,7 @@ export const ServiceColumn = [
             {imageUrl ? (
               <Image
                 src={imageUrl}
-                alt={`Banner-${id}`}
+                alt={`country-${id}`}
                 width={100}
                 height={80}
                 className="w-[100px] h-[80px] object-contain"
@@ -95,14 +79,14 @@ export const ServiceColumn = [
           >
             <DropdownMenuItem className="flex items-center gap-2 cursor-pointer hover:outline-none">
               <Link
-                href={`/admin/service/edit/${id}`}
+                href={`/admin/visa/edit/${id}`}
                 className="w-full flex justify-start"
               >
                 <Button
                   variant="ghost"
                   className="w-full flex justify-start gap-2"
                 >
-                  <Edit2 size={16} /> Edit Service
+                  <Edit2 size={16} /> Edit Country
                 </Button>
               </Link>
             </DropdownMenuItem>
@@ -113,9 +97,9 @@ export const ServiceColumn = [
               <Button
                 variant="ghost"
                 className="w-full flex justify-start gap-2"
-                onClick={() => handleDeleteBtn(id, "service")}
+                onClick={() => handleDeleteBtn(id, "visa")}
               >
-                <FiTrash2 /> Delete service
+                <FiTrash2 /> Delete Country
               </Button>
             </DropdownMenuItem>
           </DropdownMenuContent>

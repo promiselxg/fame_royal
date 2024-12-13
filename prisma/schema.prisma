@@ -64,6 +64,7 @@ model product {
 
 model service {
   id              String   @id @default(cuid()) @map("_id")
+  service_title   String?
   service_description     String
   mediaUrl        String[]
   imageId         String[]
@@ -101,8 +102,9 @@ model faq {
 
 model team {
   id              String   @id @default(cuid()) @map("_id")
-  team_name           String
-  position           String?
+  team_name       String
+  position        String?
+  social          teamSocial?
   mediaUrl        String[]
   imageId         String[]
   createdAt       DateTime @default(now())
@@ -117,4 +119,10 @@ model destination {
   imageId         String[]
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
+}
+
+type teamSocial {
+  facebook_url String?
+  instagram_url String?
+  twitter_url String?
 }

@@ -5,11 +5,10 @@ import { NextResponse } from "next/server";
 
 export const GET = async (req) => {
   try {
-    const response = await prisma.service.findMany({
+    const response = await prisma.visaService.findMany({
       select: {
         id: true,
-        service_description: true,
-        service_title: true,
+        via_country_name: true,
         mediaUrl: true,
         imageId: true,
       },
@@ -19,6 +18,7 @@ export const GET = async (req) => {
     });
     return new NextResponse(JSON.stringify(response, { status: 200 }));
   } catch (err) {
+    console.log(err);
     return new NextResponse(
       JSON.stringify({ message: "Something went wrong!" }, { status: 500 })
     );
@@ -34,13 +34,12 @@ export const POST = async (req) => {
       return errorResponse("Please fill out the required fields.", 400);
     }
     const requestData = getDataFromRequestBody(body);
-    const response = await prisma.service.create({ data: requestData });
+    const response = await prisma.visaService.create({ data: requestData });
 
     if (response) {
       return successResponse("success");
     }
   } catch (error) {
-    console.log(error);
     removeUploadedImage(public_id, "fameRoyal");
     return errorResponse("Something went wrong!", 500);
   }
@@ -67,26 +66,24 @@ export const PUT = async (req) => {
       updateData[body.field] = body.value;
     }
 
-    await prisma.service.update({
+    await prisma.visaService.update({
       where: { id: body?.id },
       data: updateData,
     });
 
     return successResponse("success");
   } catch (error) {
-    console.log(error);
     return errorResponse("Error occurred", 500);
   }
 };
 
 const isValidRequestBody = (body) => {
-  return body.service_description && body.service_title;
+  return body.via_country_name;
 };
 
 const getDataFromRequestBody = (body) => {
   return {
-    service_description: body.service_description,
-    service_title: body.service_title,
+    via_country_name: body.via_country_name,
     mediaUrl: body?.photos.map((url) => url?.secure_url),
     imageId: body?.photos.map((url) => url?.public_id?.split("/")[1]),
   };

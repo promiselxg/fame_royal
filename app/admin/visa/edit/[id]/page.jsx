@@ -14,6 +14,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 import { useImageContext } from "@/context/imageUpload.context";
 
 import { cn } from "@/lib/utils";
@@ -31,16 +32,15 @@ import Link from "next/link";
 import { __ } from "@/utils/getElementById";
 import { uploadFilesToCloudinary } from "@/utils/uploadFilesToCloudinary";
 import { Textarea } from "@/components/ui/textarea";
-import { Input } from "@/components/ui/input";
 
 const formSchema = z.object({
-  service_description: z
-    .string({ required_error: "This field is required" })
-    .min(20, { message: "give this service a detailed description." }),
-  service_title: z.string({ required_error: "This field is required" }),
+  destination_title: z.string({ required_error: "This field is required" }),
+  destination_description: z.string({
+    required_error: "This field is required",
+  }),
 });
 
-const EditService = ({ params }) => {
+const EditBannerPage = ({ params }) => {
   const { files, selectedImages, handleImageChange, removeSelectedImage } =
     useImageContext();
   const [data, setData] = useState([]);
@@ -58,7 +58,7 @@ const EditService = ({ params }) => {
         photos = await uploadFilesToCloudinary(files, "fameRoyal");
       }
       if (photos) {
-        const response = await axios.put(`/api/service`, {
+        const response = await axios.put(`/api/visa`, {
           id: params.id,
           field,
           value,
@@ -85,7 +85,7 @@ const EditService = ({ params }) => {
   useEffect(() => {
     const getBannerData = async () => {
       try {
-        const { data } = await axios.get(`/api/service/${params?.id}`);
+        const { data } = await axios.get(`/api/visa/${params?.id}`);
         setData(data || {});
       } catch (error) {
         console.log(error);
@@ -102,7 +102,7 @@ const EditService = ({ params }) => {
         <div className="w-full bg-white h-[60px] p-5 flex items-center border-[#eee] border-b-[1px]">
           <div className="w-fit flex  h-[60px]">
             <Link
-              href={`/admin/service`}
+              href={`/admin/visa`}
               className="border-r-[1px] border-[#eee] w-fit flex items-center pr-5"
             >
               <ChevronLeft size={30} />
@@ -111,7 +111,7 @@ const EditService = ({ params }) => {
         </div>
         <div className="w-full my-5 bg-[whitesmoke] px-5 flex flex-col h-screen ">
           <div className="p-5">
-            <h1 className={cn(`font-bold`)}>Edit Service</h1>
+            <h1 className={cn(`font-bold`)}>Edit tour destination</h1>
           </div>
           <div className="p-5 bg-white container w-full">
             <Form {...form}>
@@ -121,30 +121,30 @@ const EditService = ({ params }) => {
               >
                 <FormField
                   control={form.control}
-                  name="service_title"
+                  name="via_country_name"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Services Title</FormLabel>
+                      <FormLabel>Country Name</FormLabel>
                       <FormControl>
                         <Input
-                          placeholder="Services Title"
+                          placeholder="Destination Title"
                           {...field}
-                          defaultValue={data?.service_title}
+                          defaultValue={data?.via_country_name}
                           className="form-input"
                         />
                       </FormControl>
                       <FormDescription className="text-[12px] text-[#333]">
-                        give this service a matching title.
+                        the name of the country
                       </FormDescription>
                       <Button
                         type="button"
                         disabled={!field.value}
-                        id="service_title"
+                        id="via_country_name"
                         onClick={() =>
                           handleFormUpdate(
-                            "service_title",
+                            "via_country_name",
                             field?.value,
-                            "service",
+                            "visa",
                             params.id
                           )
                         }
@@ -155,44 +155,9 @@ const EditService = ({ params }) => {
                     </FormItem>
                   )}
                 />
-                <FormField
-                  control={form.control}
-                  name="service_description"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Services Description</FormLabel>
-                      <FormControl>
-                        <Textarea
-                          placeholder="Services Description"
-                          {...field}
-                          defaultValue={data?.service_description}
-                          className="form-input"
-                        />
-                      </FormControl>
-                      <FormDescription className="text-[12px] text-[#333]">
-                        give this service a detailed description.
-                      </FormDescription>
-                      <Button
-                        type="button"
-                        disabled={!field.value}
-                        id="service_description"
-                        onClick={() =>
-                          handleFormUpdate(
-                            "service_description",
-                            field?.value,
-                            "service",
-                            params.id
-                          )
-                        }
-                      >
-                        Update
-                      </Button>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+
                 <div className="flex flex-col space-y-5">
-                  <span>Edit Photo</span>
+                  <span>Country Flag</span>
                   <label htmlFor="files" className="w-fit ">
                     <CloudUpload
                       size={60}
@@ -236,4 +201,4 @@ const EditService = ({ params }) => {
   );
 };
 
-export default EditService;
+export default EditBannerPage;

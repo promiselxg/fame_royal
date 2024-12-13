@@ -1,9 +1,15 @@
+import useFetch from "@/hooks/useFetch";
 import { playfair, work_sans } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import React from "react";
+import SkeletonLoader from "./Loader";
+import { truncateText } from "@/utils/trucateText";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const Services = () => {
+  const { loading, data } = useFetch("/service");
   return (
     <>
       <section className="flex">
@@ -25,107 +31,50 @@ const Services = () => {
             clients&apos; needs.
           </p>
           <div className="grid md:grid-cols-4 grid-cols-1 gap-5 my-8">
-            <div className=" gap-y-2 flex flex-col items-center">
-              <Image
-                src="/img/hotel_rservation.jpeg"
-                width={200}
-                height={200}
-                alt="Hotel Reservations"
-                className="w-full bg-cover h-[150px]"
-              />
-              <h2
+            {loading ? (
+              <SkeletonLoader />
+            ) : (
+              data?.slice(0, 4).map((service) => (
+                <div
+                  className=" gap-y-2 flex flex-col items-center"
+                  key={service.id}
+                >
+                  <Image
+                    src={service?.mediaUrl?.[0]}
+                    width={200}
+                    height={200}
+                    alt={service?.service_title}
+                    className="w-full bg-cover h-[150px]"
+                  />
+                  <h2
+                    className={cn(
+                      `${work_sans.className} text-[17px] font-[600] text-[green]`
+                    )}
+                  >
+                    {service?.service_title}
+                  </h2>
+                  <p
+                    className={cn(
+                      `${work_sans.className} text-sm text-center text-[rgba(0,0,0,0.8)]`
+                    )}
+                  >
+                    {truncateText(service?.service_description, 200)}
+                  </p>
+                </div>
+              ))
+            )}
+          </div>
+          <div className="w-full flex items-center justify-center">
+            <Link href="/services">
+              <Button
+                variant="ghost"
                 className={cn(
-                  `${work_sans.className} text-[17px] font-[600] text-[green]`
+                  `${work_sans.className} w-fit justify-center btn-default bg-[--btn-hover]  hover:bg-[--light-yellow-text]  flex items-center gap-2 text-center`
                 )}
               >
-                Hotel Reservations
-              </h2>
-              <p
-                className={cn(
-                  `${work_sans.className} text-sm text-center text-[rgba(0,0,0,0.8)]`
-                )}
-              >
-                With an extensive network of over 200,000 hotels spanning the
-                globe, our esteemed client can be rest assured of experiencing
-                unparalleled relaxation and comfort.
-              </p>
-            </div>
-            <div className=" gap-y-2 flex flex-col items-center">
-              <Image
-                src="/img/flight_booking.jpeg"
-                width={200}
-                height={200}
-                alt="services"
-                className="w-full bg-cover h-[150px]"
-              />
-              <h2
-                className={cn(
-                  `${work_sans.className} text-[17px] font-[600]  text-[green]`
-                )}
-              >
-                Flight Booking
-              </h2>
-              <p
-                className={cn(
-                  `${work_sans.className} text-sm text-center text-[rgba(0,0,0,0.8)]`
-                )}
-              >
-                With our comprehensive flight booking system, we excel in
-                securing both domestic and international flights at competitive
-                rates.
-              </p>
-            </div>
-            <div className=" gap-y-2 flex flex-col items-center">
-              <Image
-                src="/img/visa.jpeg"
-                width={200}
-                height={200}
-                alt="Visa facilitation and support services"
-                className="w-full bg-cover h-[150px]"
-              />
-              <h2
-                className={cn(
-                  `${work_sans.className} text-[17px] font-[600]  text-[green]`
-                )}
-              >
-                Visa facilitation and support services
-              </h2>
-              <p
-                className={cn(
-                  `${work_sans.className} text-sm text-center text-[rgba(0,0,0,0.8)]`
-                )}
-              >
-                We specialize in facilitating travel to a diverse range of
-                destinations globally, equipping individuals with all necessary
-                legal documentation and invitation letters to streamline
-                procedures and enhance visa approval prospects.
-              </p>
-            </div>
-            <div className=" gap-y-2 flex flex-col items-center">
-              <Image
-                src="/img/travel.jpg"
-                width={200}
-                height={200}
-                alt="services"
-                className="w-full bg-cover h-[150px]"
-              />
-              <h2
-                className={cn(
-                  `${work_sans.className} text-[17px] font-[600]  text-[green]`
-                )}
-              >
-                Travel excursion bundle
-              </h2>
-              <p
-                className={cn(
-                  `${work_sans.className} text-sm text-center text-[rgba(0,0,0,0.8)]`
-                )}
-              >
-                Our meticulously curates travel excursion bundles are brimming
-                with opportunities to discover captivating locales and engage in
-                exhilarating pursuits.
-              </p>
-            </div>
+                view all services
+              </Button>
+            </Link>
           </div>
         </div>
       </section>

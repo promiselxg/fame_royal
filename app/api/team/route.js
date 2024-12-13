@@ -1,7 +1,6 @@
 import { removeUploadedImage } from "@/utils/cloudinary";
 import prisma from "@/utils/dbConnect";
 import { errorResponse, successResponse } from "@/utils/errorMessage";
-import host from "@/utils/host";
 import { NextResponse } from "next/server";
 
 export const GET = async (req) => {
@@ -11,6 +10,7 @@ export const GET = async (req) => {
         id: true,
         team_name: true,
         position: true,
+        social: true,
         mediaUrl: true,
         imageId: true,
       },
@@ -49,7 +49,7 @@ export const POST = async (req) => {
 
 export const PUT = async (req) => {
   const body = await req.json();
-
+  console.log(body);
   if (!body?.value || !body?.field || !body.id) {
     return errorResponse("Please fill out the form.");
   }
@@ -64,6 +64,17 @@ export const PUT = async (req) => {
         (url) => url.public_id.split("/")[1]
       );
       removeUploadedImage(body.value, "fameRoyal");
+    } else if (
+      ["twitter_url", "facebook_url", "instagram_url"].includes(body.field)
+    ) {
+      const team = await prisma.team.findUnique({
+        where: { id: body.id },
+        select: { social: true },
+      });
+      updateData.social = {
+        ...team.social,
+        [body.field]: body.value,
+      };
     } else {
       updateData[body.field] = body.value;
     }
@@ -87,6 +98,11 @@ const getDataFromRequestBody = (body) => {
   return {
     position: body.position,
     team_name: body.team_name,
+    social: {
+      facebook_url: body.facebook_url,
+      instagram_url: body.instagram_url,
+      twitter_url: body.twitter_url,
+    },
     mediaUrl: body?.photos.map((url) => url?.secure_url),
     imageId: body?.photos.map((url) => url?.public_id?.split("/")[1]),
   };

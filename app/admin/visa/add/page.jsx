@@ -13,9 +13,10 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 import { useImageContext } from "@/context/imageUpload.context";
 
-import { __, cn } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ChevronLeft, CloudUpload, Loader2, X } from "lucide-react";
 import React, { useContext, useEffect, useState } from "react";
@@ -31,16 +32,12 @@ import { verifyToken } from "@/utils/verifyToken";
 import { uploadFilesToCloudinary } from "@/utils/uploadFilesToCloudinary";
 import { useToast } from "@/components/ui/use-toast";
 import { Textarea } from "@/components/ui/textarea";
-import { Input } from "@/components/ui/input";
 
 const formSchema = z.object({
-  service_description: z
-    .string({ required_error: "This field is required" })
-    .min(20, { message: "give this service a detailed description." }),
-  service_title: z.string({ required_error: "This field is required" }),
+  via_country_name: z.string({ required_error: "This field is required" }),
 });
 
-const AddService = () => {
+const AddBanner = () => {
   const { user } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
 
@@ -51,15 +48,14 @@ const AddService = () => {
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      service_description: "",
-      service_title: "",
+      via_country_name: "",
     },
   });
 
   async function onSubmit(values) {
     setLoading(true);
     // Validate required fields
-    const requiredFields = ["service_description", "service_title"];
+    const requiredFields = ["via_country_name"];
     const missingFields = requiredFields.filter((field) => !values[field]);
     if (missingFields.length > 0) {
       setLoading(false);
@@ -84,7 +80,7 @@ const AddService = () => {
         photos,
       };
       // Submit data to the backend
-      const response = await axios.post(`${host.url}/service`, data);
+      const response = await axios.post(`${host.url}/visa`, data);
       if (response?.data?.message !== "success") {
         toast({
           variant: "destructive",
@@ -130,7 +126,7 @@ const AddService = () => {
         <div className="w-full bg-white h-[60px] p-5 flex items-center border-[#eee] border-b-[1px]">
           <div className="w-fit flex  h-[60px]">
             <Link
-              href={`/admin/service?q=${user?.token}`}
+              href={`/admin/visa?q=${user?.token}`}
               className="border-r-[1px] border-[#eee] w-fit flex items-center pr-5"
             >
               <ChevronLeft size={30} />
@@ -139,7 +135,7 @@ const AddService = () => {
         </div>
         <div className="w-full my-5 bg-[whitesmoke] px-5 flex flex-col h-screen ">
           <div className="p-5">
-            <h1 className={cn(`font-bold`)}>Add Service</h1>
+            <h1 className={cn(`font-bold`)}>add new country</h1>
           </div>
           <div className="p-5 bg-white container w-full">
             <Form {...form}>
@@ -149,48 +145,26 @@ const AddService = () => {
               >
                 <FormField
                   control={form.control}
-                  name="service_title"
+                  name="via_country_name"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Services Title</FormLabel>
+                      <FormLabel>Country Name</FormLabel>
                       <FormControl>
                         <Input
-                          placeholder="Services Title"
+                          placeholder="Country Name"
                           {...field}
                           className="form-input"
                         />
                       </FormControl>
                       <FormDescription className="text-[12px] text-[#333]">
-                        give this service a matching title.
+                        the name of the country
                       </FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
-
-                <FormField
-                  control={form.control}
-                  name="service_description"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Services Description</FormLabel>
-                      <FormControl>
-                        <Textarea
-                          placeholder="Services Description"
-                          {...field}
-                          className="form-input"
-                        />
-                      </FormControl>
-                      <FormDescription className="text-[12px] text-[#333]">
-                        give this service a detailed description.
-                      </FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
                 <div className="flex flex-col space-y-5">
-                  <span>Add Photo</span>
+                  <span>Country Flag</span>
                   <label htmlFor="files" className="w-fit ">
                     <CloudUpload
                       size={60}
@@ -228,4 +202,4 @@ const AddService = () => {
   );
 };
 
-export default AddService;
+export default AddBanner;

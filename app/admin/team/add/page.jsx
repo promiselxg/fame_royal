@@ -14,13 +14,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { useImageContext } from "@/context/imageUpload.context";
 
 import { cn } from "@/lib/utils";
@@ -42,6 +35,9 @@ import { useToast } from "@/components/ui/use-toast";
 const formSchema = z.object({
   team_name: z.string({ required_error: "This field is required" }),
   position: z.string({ required_error: "This field is required" }),
+  facebook_url: z.string().optional(),
+  instagram_url: z.string().optional(),
+  twitter_url: z.string().optional(),
 });
 
 const AddTeam = () => {
@@ -57,6 +53,9 @@ const AddTeam = () => {
     defaultValues: {
       team_name: "",
       position: "",
+      facebook_url: "",
+      instagram_url: "",
+      twitter_url: "",
     },
   });
 
@@ -187,6 +186,66 @@ const AddTeam = () => {
                       </FormControl>
                       <FormDescription className="text-[12px] text-[#333]">
                         team member position (eg. chairman).
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="facebook_url"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Facebook Username (optional)</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="Facebook Username"
+                          {...field}
+                          className="form-input"
+                        />
+                      </FormControl>
+                      <FormDescription className="text-[12px] text-[#333]">
+                        Facebook Profile Address (https://www.facebook.com/)
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="instagram_url"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Instagram URL (optional)</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="Instagram URL"
+                          {...field}
+                          className="form-input"
+                        />
+                      </FormControl>
+                      <FormDescription className="text-[12px] text-[#333]">
+                        Instagram URL
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="twitter_url"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Twitter URL (optional)</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="Twitter URL"
+                          {...field}
+                          className="form-input"
+                        />
+                      </FormControl>
+                      <FormDescription className="text-[12px] text-[#333]">
+                        Twitter URL
                       </FormDescription>
                       <FormMessage />
                     </FormItem>

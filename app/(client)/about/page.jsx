@@ -6,8 +6,11 @@ import Image from "next/image";
 import { FiFacebook, FiInstagram, FiTwitter } from "react-icons/fi";
 import Link from "next/link";
 import { useEffect } from "react";
+import useFetch from "@/hooks/useFetch";
 
 const About = () => {
+  const { loading, data } = useFetch("/team");
+
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -154,156 +157,69 @@ const About = () => {
             </h2>
           </div>
           <div className="grid w-full md:grid-cols-3 grid-cols-1 gap-5 z-10">
-            <div className="boxShadow  cursor-pointer teamMember rounded-[5px] h-fit relative">
-              <div className="w-full h-[300px] overflow-hidden">
-                <Image
-                  src="https://travio.smartdemowp.com/wp-content/uploads/2021/02/team-1.jpg"
-                  width={300}
-                  height={300}
-                  alt="Our Team"
-                  className="w-full bg-cover h-[300px]"
-                />
-              </div>
-
-              <div className="flex flex-col gap-y-1 justify-center text-center ">
-                <div className="flex flex-col justify-center lower-content">
-                  <h1
-                    className={cn(
-                      `${playfair.className} text-sm md:text-[20px] font-[900]`
-                    )}
-                  >
-                    Team member name
-                  </h1>
-                  <p
-                    className={cn(
-                      `${work_sans.className} text-sm md:text-[16px] font-[600]`
-                    )}
-                  >
-                    Chairman
-                  </p>
+            {console.log(data)}
+            {data?.map((team) => (
+              <div
+                className="boxShadow  cursor-pointer teamMember rounded-[5px] h-fit relative"
+                key={team?.id}
+              >
+                <div className="w-full h-[300px] overflow-hidden">
+                  <Image
+                    src={team?.mediaUrl?.[0]}
+                    width={300}
+                    height={300}
+                    alt={team?.team_name}
+                    className="w-full bg-cover h-[300px]"
+                  />
                 </div>
-                <div className="social-links flex items-center gap-2 justify-center text-center ">
-                  <Link
-                    href="/"
-                    className="bg-[rgba(0,0,0,0.2)] p-2 rounded-full"
-                  >
-                    <FiFacebook className="text-[rgb(0,0,255)]" />
-                  </Link>
-                  <Link
-                    href="/"
-                    className="bg-[rgba(0,0,0,0.2)] p-2 rounded-full"
-                  >
-                    <FiInstagram className="text-[rgb(0,128,0)]" />
-                  </Link>
-                  <Link
-                    href="/"
-                    className="bg-[rgba(0,0,0,0.2)] p-2 rounded-full"
-                  >
-                    <FiTwitter className="text-red-700" />
-                  </Link>
-                </div>
-              </div>
-            </div>
-            <div className="boxShadow  cursor-pointer teamMember rounded-[5px] h-fit relative">
-              <div className="w-full h-[300px] overflow-hidden">
-                <Image
-                  src="https://travio.smartdemowp.com/wp-content/uploads/2021/02/team-1.jpg"
-                  width={300}
-                  height={300}
-                  alt="Our Team"
-                  className="w-full bg-cover h-[300px]"
-                />
-              </div>
-
-              <div className="flex flex-col gap-y-1 justify-center text-center ">
-                <div className="flex flex-col justify-center lower-content">
-                  <h1
-                    className={cn(
-                      `${playfair.className} text-[20px] font-[900]`
+                <div className="flex flex-col gap-y-1 justify-center text-center ">
+                  <div className="flex flex-col justify-center lower-content">
+                    <h1
+                      className={cn(
+                        `${playfair.className} text-sm md:text-[20px] font-[900]`
+                      )}
+                    >
+                      {team?.team_name}
+                    </h1>
+                    {team?.team_name && (
+                      <p
+                        className={cn(
+                          `${work_sans.className} text-sm md:text-[16px] font-[600]`
+                        )}
+                      >
+                        {team?.position}
+                      </p>
                     )}
-                  >
-                    C.E.O Name
-                  </h1>
-                  <p
-                    className={cn(
-                      `${work_sans.className} text-[16px] font-[600]`
+                  </div>
+                  <div className="social-links flex items-center gap-2 justify-center text-center ">
+                    {team?.social?.facebook_url && (
+                      <Link
+                        href={team?.social?.facebook_url}
+                        className="bg-[rgba(0,0,0,0.2)] p-2 rounded-full"
+                      >
+                        <FiFacebook className="text-blue-700" />
+                      </Link>
                     )}
-                  >
-                    Director
-                  </p>
-                </div>
-                <div className="social-links flex items-center gap-2 justify-center text-center ">
-                  <Link
-                    href="/"
-                    className="bg-[rgba(0,0,0,0.2)] p-2 rounded-full"
-                  >
-                    <FiFacebook className="text-[rgb(0,0,255)]" />
-                  </Link>
-                  <Link
-                    href="/"
-                    className="bg-[rgba(0,0,0,0.2)] p-2 rounded-full"
-                  >
-                    <FiInstagram className="text-[rgb(0,128,0)]" />
-                  </Link>
-                  <Link
-                    href="/"
-                    className="bg-[rgba(0,0,0,0.2)] p-2 rounded-full"
-                  >
-                    <FiTwitter className="text-red-700" />
-                  </Link>
+                    {team?.social?.twitter_url && (
+                      <Link
+                        href={team?.social?.twitter_url}
+                        className="bg-[rgba(0,0,0,0.2)] p-2 rounded-full"
+                      >
+                        <FiTwitter className="text-green-700" />
+                      </Link>
+                    )}
+                    {team?.social?.instagram_url && (
+                      <Link
+                        href={team?.social?.instagram_url}
+                        className="bg-[rgba(0,0,0,0.2)] p-2 rounded-full"
+                      >
+                        <FiInstagram className="text-red-700" />
+                      </Link>
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="boxShadow  cursor-pointer teamMember rounded-[5px] h-fit relative">
-              <div className="w-full h-[300px] overflow-hidden">
-                <Image
-                  src="https://travio.smartdemowp.com/wp-content/uploads/2021/02/team-1.jpg"
-                  width={300}
-                  height={300}
-                  alt="Our Team"
-                  className="w-full bg-cover h-[300px]"
-                />
-              </div>
-
-              <div className="flex flex-col gap-y-1 justify-center text-center ">
-                <div className="flex flex-col justify-center lower-content">
-                  <h1
-                    className={cn(
-                      `${playfair.className} text-[20px] font-[900]`
-                    )}
-                  >
-                    C.E.O Name
-                  </h1>
-                  <p
-                    className={cn(
-                      `${work_sans.className} text-[16px] font-[600]`
-                    )}
-                  >
-                    C.E.O
-                  </p>
-                </div>
-                <div className="social-links flex items-center gap-2 justify-center text-center ">
-                  <Link
-                    href="/"
-                    className="bg-[rgba(0,0,0,0.2)] p-2 rounded-full"
-                  >
-                    <FiFacebook className="text-[rgb(0,0,255)]" />
-                  </Link>
-                  <Link
-                    href="/"
-                    className="bg-[rgba(0,0,0,0.2)] p-2 rounded-full"
-                  >
-                    <FiInstagram className="text-[rgb(0,128,0)]" />
-                  </Link>
-                  <Link
-                    href="/"
-                    className="bg-[rgba(0,0,0,0.2)] p-2 rounded-full"
-                  >
-                    <FiTwitter className="text-red-700" />
-                  </Link>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>

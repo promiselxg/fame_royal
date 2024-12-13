@@ -7,8 +7,13 @@ import Image from "next/image";
 import Breadcrumb from "../_components/breadcrumb";
 import { useEffect } from "react";
 import Link from "next/link";
+import useFetch from "@/hooks/useFetch";
+import SkeletonLoader from "../_components/Loader";
+import { formatCurrency } from "@/utils/formatCurrency";
+import { truncateText } from "@/utils/trucateText";
 
 const ToursPage = () => {
+  const { loading, data } = useFetch("/tour");
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -35,7 +40,7 @@ const ToursPage = () => {
             <Breadcrumb label="Tours" className="md:ml-2 mb-5" />
           </div>
         </div>
-        <div className=" mx-auto md:w-[1200px] -mt-[50px] z-10 mb-[50px]">
+        {/* <div className=" mx-auto md:w-[1200px] -mt-[50px] z-10 mb-[50px]">
           <div className="w-full boxShadow bg-[whitesmoke] p-5 flex gap-5  rounded-[8px] justify-between container mx-auto flex-col md:flex-row">
             <div className="flex w-full gap-5 flex-col md:flex-row">
               <input
@@ -74,113 +79,73 @@ const ToursPage = () => {
               </Button>
             </div>
           </div>
-        </div>
+        </div> */}
         <div className="container md:w-[1200px] mx-auto flex pb-[50px] z-10 flex-col">
           <h1
             className={cn(
               `${playfair.className} text-[15px] md:text-[30px] font-[900] py-8`
             )}
           >
-            Showing 1-6 results out of 6 results.
+            Showing 1-{data?.length} results out of {data?.length} results.
           </h1>
           <div className="w-full flex gap-5 flex-col md:flex-row">
             <div className="w-full gap-y-8 flex flex-col">
-              <div className="w-full boxShadow bg-[white] flex px-5 py-6 gap-8  rounded-[8px]  flex-col md:flex-row">
-                <div className="w-full md:w-[150px] h-[150px] rounded-[8px] overflow-hidden">
-                  <Image
-                    src="https://travio.smartdemowp.com/wp-content/uploads/2021/02/feature-3.jpg"
-                    width={200}
-                    height={200}
-                    alt="services"
-                    className="w-full bg-cover h-[150px]"
-                  />
-                </div>
-                <div>
-                  <h1
-                    className={cn(
-                      `${playfair.className} text-[20px] md:text-[30px] font-[900]`
-                    )}
+              {loading ? (
+                <SkeletonLoader />
+              ) : (
+                data?.map((tour) => (
+                  <div
+                    className="w-full boxShadow bg-[white] flex px-5 py-6 gap-8  rounded-[8px]  flex-col md:flex-row"
+                    key={tour.id}
                   >
-                    Vancouver Red City Land
-                  </h1>
-                  <div className={cn(`${work_sans.className} py-2`)}>
-                    <span
-                      className={cn(
-                        `${playfair.className} text-sm md:text-[16px] font-[600]`
-                      )}
-                    >
-                      N50,000
-                    </span>
-                    <span className="text-sm font-[600]"> /per person</span>
+                    <div className="w-full md:w-[150px] h-[150px] rounded-[8px] overflow-hidden">
+                      <Image
+                        src={tour?.mediaUrl?.[0]}
+                        width={200}
+                        height={200}
+                        alt="services"
+                        className="w-full bg-cover h-[150px]"
+                      />
+                    </div>
+                    <div>
+                      <h1
+                        className={cn(
+                          `${playfair.className} text-[20px] md:text-[30px] font-[900]`
+                        )}
+                      >
+                        {tour?.tour_destination}
+                      </h1>
+                      <div className={cn(`${work_sans.className} py-2`)}>
+                        <span
+                          className={cn(
+                            `${playfair.className} text-sm md:text-[16px] font-[600]`
+                          )}
+                        >
+                          {formatCurrency(tour?.tour_fee)}
+                        </span>
+                        <span className="text-sm font-[600]"> /per person</span>
+                      </div>
+                      <p
+                        className={cn(
+                          `${work_sans.className} pb-3 text-sm md:text-[16px]`
+                        )}
+                      >
+                        {truncateText(tour?.tour_description, 200)}
+                      </p>
+                      <Link href={`/tour/${tour?.id}`}>
+                        <Button
+                          variant="outline"
+                          className={cn(
+                            `${work_sans.className} hover:bg-[--btn-hover] py-[17.5px] px-[36px] md:h-[55px] hover:text-white transition-all delay-75 rounded-[2px]`
+                          )}
+                        >
+                          See Details
+                        </Button>
+                      </Link>
+                    </div>
                   </div>
-                  <p
-                    className={cn(
-                      `${work_sans.className} pb-3 text-sm md:text-[16px]`
-                    )}
-                  >
-                    Lorem ipsum dolor amet consectetur adipiscing sed do eiusmod
-                    tempor incididunt.
-                  </p>
-                  <Link href="/tour/tour-name">
-                    <Button
-                      variant="outline"
-                      className={cn(
-                        `${work_sans.className} hover:bg-[--btn-hover] py-[17.5px] px-[36px] md:h-[55px] hover:text-white transition-all delay-75 rounded-[2px]`
-                      )}
-                    >
-                      See Details
-                    </Button>
-                  </Link>
-                </div>
-              </div>
-              <div className="w-full boxShadow bg-[white] flex px-5 py-6 gap-8  rounded-[8px] flex-col md:flex-row">
-                <div className="w-full md:w-[150px] h-[150px] rounded-[8px] overflow-hidden">
-                  <Image
-                    src="https://travio.smartdemowp.com/wp-content/uploads/2021/02/feature-3.jpg"
-                    width={200}
-                    height={200}
-                    alt="services"
-                    className="w-full bg-cover h-[150px]"
-                  />
-                </div>
-                <div>
-                  <h1
-                    className={cn(
-                      `${playfair.className} text-[15px] md:text-[30px] font-[900]`
-                    )}
-                  >
-                    Miami Red City Land
-                  </h1>
-                  <div className={cn(`${work_sans.className} py-2`)}>
-                    <span
-                      className={cn(
-                        `${playfair.className} text-sm md:text-[16px] font-[600]`
-                      )}
-                    >
-                      N50,000
-                    </span>
-                    <span className="text-sm font-[600]"> /per person</span>
-                  </div>
-                  <p
-                    className={cn(
-                      `${work_sans.className} pb-3 text-sm md:text-[16px]`
-                    )}
-                  >
-                    Lorem ipsum dolor amet consectetur adipiscing sed do eiusmod
-                    tempor incididunt.
-                  </p>
-                  <Link href="/tour/tour-name">
-                    <Button
-                      variant="outline"
-                      className={cn(
-                        `${work_sans.className} hover:bg-[--btn-hover] py-[17.5px] px-[36px] md:h-[55px] hover:text-white transition-all delay-75 rounded-[2px]`
-                      )}
-                    >
-                      See Details
-                    </Button>
-                  </Link>
-                </div>
-              </div>
+                ))
+              )}
             </div>
             <div
               className={cn(

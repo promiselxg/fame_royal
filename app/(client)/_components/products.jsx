@@ -1,12 +1,17 @@
 import { Button } from "@/components/ui/button";
+import useFetch from "@/hooks/useFetch";
 import { playfair, work_sans } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { FiClock, FiMapPin } from "react-icons/fi";
+import SkeletonLoader from "./Loader";
+import { formatCurrency } from "@/utils/formatCurrency";
+import { truncateText } from "@/utils/trucateText";
 
 const Products = () => {
+  const { loading, data } = useFetch("/tour");
   const price = "";
   return (
     <>
@@ -26,200 +31,80 @@ const Products = () => {
           >
             Our Tour Packages
           </h2>
-          <div className="grid w-full md:grid-cols-3 grid-cols-1 gap-5 z-10">
-            <div className="bg-white md:min-w-[300px] boxShadow rounded-[5px]  overflow-hidden">
-              <div className="w-full h-[280px] overflow-hidden">
-                <Image
-                  src="/img/dubia_city.jpg"
-                  width={300}
-                  height={300}
-                  alt="tour 1"
-                  className="w-full bg-cover h-[280px]"
-                />
-              </div>
-              <div className="p-5">
-                <span className="py-2">
-                  <h1
-                    className={cn(
-                      `${work_sans.className} text-[17px] font-[600]`
+          {loading ? (
+            <SkeletonLoader />
+          ) : (
+            <div className="grid w-full md:grid-cols-3 grid-cols-1 gap-5 z-10">
+              {data?.slice(0, 3).map((tour) => (
+                <div
+                  className="bg-white md:min-w-[300px] boxShadow rounded-[5px]  overflow-hidden"
+                  key={tour.id}
+                >
+                  <div className="w-full h-[280px] overflow-hidden">
+                    <Image
+                      src={tour?.mediaUrl?.[0]}
+                      width={300}
+                      height={300}
+                      alt={tour?.tour_destination}
+                      className="w-full bg-cover h-[280px]"
+                    />
+                  </div>
+                  <div className="p-5">
+                    <span className="py-2">
+                      <h1
+                        className={cn(
+                          `${work_sans.className} text-[17px] font-[600]`
+                        )}
+                      >
+                        {tour?.tour_destination}
+                      </h1>
+                    </span>
+                    {tour?.tour_fee && (
+                      <div className="w-full flex gap-2 py-2">
+                        <span
+                          className={cn(
+                            `${work_sans.className} text-[17px] font-[600]`
+                          )}
+                        >
+                          {formatCurrency(tour?.tour_fee)}
+                        </span>
+                        <span>/</span>
+                        <span className="text-sm">per person</span>
+                      </div>
                     )}
-                  >
-                    Dubia
-                  </h1>
-                </span>
-                {price && (
-                  <div className="w-full flex gap-2 py-2">
-                    <span
+                    {/* <div
                       className={cn(
-                        `${work_sans.className} text-[17px] font-[600]`
+                        `${work_sans.className} bg-[whitesmoke] p-4 w-full font-[600] text-sm flex justify-between rounded-[2px]`
                       )}
                     >
-                      &#8358;5,000
-                    </span>
-                    <span>/</span>
-                    <span className="text-sm">per person</span>
+                      <span className="flex gap-1 items-center">
+                        <FiClock />5 Days
+                      </span>
+                      <span className="flex gap-1 items-center">
+                        <FiMapPin /> Abuja
+                      </span>
+                    </div> */}
+                    <div className="py-4">
+                      <p className={cn(`${work_sans.className} text-[15px]`)}>
+                        {truncateText(tour.tour_description, 100)}
+                      </p>
+                    </div>
+                    <Link href={`/tour/${tour.id}`}>
+                      <Button
+                        variant="outline"
+                        className={cn(
+                          `${work_sans.className} hover:bg-[--btn-hover] py-[17.5px] px-[36px] md:h-[55px] hover:text-white transition-all delay-75 rounded-[2px]`
+                        )}
+                      >
+                        See Details
+                      </Button>
+                    </Link>
+                    <div className="pb-8"></div>
                   </div>
-                )}
-                <div
-                  className={cn(
-                    `${work_sans.className} bg-[whitesmoke] p-4 w-full font-[600] text-sm flex justify-between rounded-[2px]`
-                  )}
-                >
-                  <span className="flex gap-1 items-center">
-                    <FiClock />5 Days
-                  </span>
-                  <span className="flex gap-1 items-center">
-                    <FiMapPin /> Abuja
-                  </span>
                 </div>
-                <div className="py-4">
-                  <p className={cn(`${work_sans.className} text-[15px]`)}>
-                    Lorem ipsum dolor amet consectetur adipiscing sed do eiusmod
-                    tempor incididunt.
-                  </p>
-                </div>
-                <Link href="/product/moscow">
-                  <Button
-                    variant="outline"
-                    className={cn(
-                      `${work_sans.className} hover:bg-[--btn-hover] py-[17.5px] px-[36px] md:h-[55px] hover:text-white transition-all delay-75 rounded-[2px]`
-                    )}
-                  >
-                    See Details
-                  </Button>
-                </Link>
-                <div className="pb-8"></div>
-              </div>
+              ))}
             </div>
-            <div className="bg-white w-full md:min-w-[300px] boxShadow rounded-[5px] overflow-hidden">
-              <div className="w-full h-[280px] overflow-hidden">
-                <Image
-                  src="/img/moscow.webp"
-                  width={300}
-                  height={300}
-                  alt="tour 1"
-                  className="w-full bg-cover h-[280px]"
-                />
-              </div>
-              <div className="p-5">
-                <span className="py-2">
-                  <h1
-                    className={cn(
-                      `${work_sans.className} text-[17px] font-[600]`
-                    )}
-                  >
-                    Moscow
-                  </h1>
-                </span>
-                {price && (
-                  <div className="w-full flex gap-2 py-2">
-                    <span
-                      className={cn(
-                        `${work_sans.className} text-[17px] font-[600]`
-                      )}
-                    >
-                      &#8358;5,000
-                    </span>
-                    <span>/</span>
-                    <span className="text-sm">per person</span>
-                  </div>
-                )}
-                <div
-                  className={cn(
-                    `${work_sans.className} bg-[whitesmoke] p-4 w-full font-[600] text-sm flex justify-between rounded-[2px]`
-                  )}
-                >
-                  <span className="flex gap-1 items-center">
-                    <FiClock />5 Days
-                  </span>
-                  <span className="flex gap-1 items-center">
-                    <FiMapPin /> Abuja
-                  </span>
-                </div>
-                <div className="py-4">
-                  <p className={cn(`${work_sans.className} text-[15px]`)}>
-                    Lorem ipsum dolor amet consectetur adipiscing sed do eiusmod
-                    tempor incididunt.
-                  </p>
-                </div>
-                <Link href="/product/moscow">
-                  <Button
-                    variant="outline"
-                    className={cn(
-                      `${work_sans.className} hover:bg-[--btn-hover] py-[17.5px] px-[36px] md:h-[55px] hover:text-white transition-all delay-75 rounded-[2px]`
-                    )}
-                  >
-                    See Details
-                  </Button>
-                </Link>
-                <div className="pb-8"></div>
-              </div>
-            </div>
-            <div className="bg-white w-full md:min-w-[300px] boxShadow rounded-[5px] overflow-hidden">
-              <div className="w-full h-[280px] overflow-hidden">
-                <Image
-                  src="/img/singapore.webp"
-                  width={300}
-                  height={300}
-                  alt="tour 1"
-                  className="w-full bg-cover h-[280px]"
-                />
-              </div>
-              <div className="p-5">
-                <span className="py-2">
-                  <h1
-                    className={cn(
-                      `${work_sans.className} text-[17px] font-[600]`
-                    )}
-                  >
-                    Singapore City Tour
-                  </h1>
-                </span>
-                {price && (
-                  <div className="w-full flex gap-2 py-2">
-                    <span
-                      className={cn(
-                        `${work_sans.className} text-[17px] font-[600]`
-                      )}
-                    >
-                      &#8358;5,000
-                    </span>
-                    <span>/</span>
-                    <span className="text-sm">per person</span>
-                  </div>
-                )}
-                <div
-                  className={cn(
-                    `${work_sans.className} bg-[whitesmoke] p-4 w-full font-[600] text-sm flex justify-between rounded-[2px]`
-                  )}
-                >
-                  <span className="flex gap-1 items-center">
-                    <FiClock />5 Days
-                  </span>
-                  <span className="flex gap-1 items-center">
-                    <FiMapPin /> Abuja
-                  </span>
-                </div>
-                <div className="py-4">
-                  <p className={cn(`${work_sans.className} text-[15px]`)}>
-                    Lorem ipsum dolor amet consectetur adipiscing sed do eiusmod
-                    tempor incididunt.
-                  </p>
-                </div>
-                <Link href="/product/moscow">
-                  <Button
-                    variant="outline"
-                    className={cn(
-                      `${work_sans.className} hover:bg-[--btn-hover] py-[17.5px] px-[36px] md:h-[55px] hover:text-white transition-all delay-75 rounded-[2px]`
-                    )}
-                  >
-                    See Details
-                  </Button>
-                </Link>
-                <div className="pb-8"></div>
-              </div>
-            </div>
-          </div>
+          )}
         </div>
       </section>
     </>
