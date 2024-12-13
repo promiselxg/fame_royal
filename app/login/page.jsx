@@ -27,6 +27,8 @@ const Page = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    console.log(formData);
     if (!formData?.username || !formData.password) {
       toast({
         description: "Please fill out all fields.",
@@ -36,7 +38,11 @@ const Page = () => {
     }
     try {
       setLoading(true);
-      const { data } = await axios.post(`/api/auth/login`, formData);
+      const { data } = await axios.post(`/api/auth/login`, formData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       if (data?.message !== "Login Successful") {
         toast({
           description: data?.message,

@@ -7,7 +7,6 @@ export const POST = async (req) => {
   try {
     const { username, password } = await req.json();
     const userN = username?.toLowerCase();
-
     // Check if username and password are provided
     if (!userN || !password) {
       return NextResponse.json(
