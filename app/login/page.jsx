@@ -27,8 +27,6 @@ const Page = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    console.log(formData);
     if (!formData?.username || !formData.password) {
       toast({
         description: "Please fill out all fields.",
@@ -53,7 +51,6 @@ const Page = () => {
         router.push(`/admin/dashboard?q=${data?.userInfo?.token}`);
       }
     } catch (error) {
-      console.log(error);
       const message =
         error.response?.data?.message || "An unknown error occurred.";
       toast({

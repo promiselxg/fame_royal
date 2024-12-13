@@ -13,6 +13,7 @@ import {
   Power,
   Settings,
   StickyNote,
+  User,
   User2Icon,
   Users,
   UsersRound,
@@ -34,7 +35,7 @@ const SideNav = () => {
   const { user, openNavBar, handleLogOut } = useContext(AuthContext);
   return (
     <>
-      <ScrollArea
+      <div
         className={cn(
           `${
             barlow.className
@@ -45,7 +46,7 @@ const SideNav = () => {
       >
         <div className="p-5 w-full">
           <h1 className="p-2 my-[2px] uppercase">Fame Royal</h1>
-          <div className="relative h-[calc(100vh-100px)]">
+          <ScrollArea className="relative h-[calc(100vh-150px)]">
             <ul className="flex flex-col ">
               <li
                 className={`${
@@ -197,7 +198,7 @@ const SideNav = () => {
                 className="my-2 w-full bg-[rgba(255,255,255,0.1)] "
                 orientation="horizontal"
               />
-              <span className="my-2 px-3 ">Settings</span>
+
               <li
                 className={cn(
                   `${openDropDown ? "active" : ""} my-[2px] h-10 nav w-full`
@@ -209,6 +210,20 @@ const SideNav = () => {
                   <Settings size={18} />
                   Settings
                 </div>
+              </li>
+              <li
+                className={`${
+                  currentRoute === "/admin/users" && "active"
+                } my-[2px] h-10 nav`}
+              >
+                <Link
+                  href={`/admin/users?q=${user?.token}`}
+                  className="flex gap-2 items-center py-2  h-8 leading-tight relative"
+                >
+                  <span className="w-[1px] h-8 rounded-r-[5px] border-r-4 border-transparent"></span>
+                  <User size={18} />
+                  Manage Users
+                </Link>
               </li>
             </ul>
             <ul
@@ -227,18 +242,18 @@ const SideNav = () => {
                 <UsernameModal />
               </li>
             </ul>
-            <div className="w-full py-5">
-              <Button
-                className="bg-[#474747] w-full  justify-start flex items-center gap-2 rounded-[8px] text-white font-[600] p-2 hover:bg-[rgb(71,71,71,.8)]"
-                onClick={() => handleLogOut()}
-              >
-                <Power size={18} />
-                Logout ({user && truncateText(user?.username, 15)})
-              </Button>
-            </div>
+          </ScrollArea>
+          <div className="w-full py-5">
+            <Button
+              className="bg-[#474747] w-full  justify-start flex items-center gap-2 rounded-[8px] text-white font-[600] p-2 hover:bg-[rgb(71,71,71,.8)]"
+              onClick={() => handleLogOut()}
+            >
+              <Power size={18} />
+              Logout ({user && truncateText(user?.username, 15)})
+            </Button>
           </div>
         </div>
-      </ScrollArea>
+      </div>
     </>
   );
 };

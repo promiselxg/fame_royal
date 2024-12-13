@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { handleDeleteBtn } from "@/utils/deleteItemFromDb";
+import { truncateText } from "@/utils/trucateText";
 
 import {
   DropdownMenu,
@@ -24,7 +25,7 @@ export const BannerColumns = [
       return (
         <>
           <div>
-            <p className={cn(`text-sm`)}>{description}</p>
+            <p className={cn(`text-sm`)}>{truncateText(description, 50)}</p>
           </div>
         </>
       );
