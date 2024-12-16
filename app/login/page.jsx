@@ -63,7 +63,7 @@ const Page = () => {
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full flex items-center h-screen">
       <div className="w-full px-5 md:w-1/2 mx-auto flex justify-center items-center flex-col md:h-screen h-fit">
         <form
           onSubmit={handleSubmit}
