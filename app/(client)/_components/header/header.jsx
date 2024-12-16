@@ -234,7 +234,7 @@ const Header = () => {
             </li>
           </ul>
           <div className="flex mt-6">
-            <a href="https://wa.me/2347015564131" target="_blank">
+            <a href="https://wa.me/2349078039917" target="_blank">
               <Button
                 className={cn(
                   `${work_sans.className} btn-default bg-[--light-yellow-text]  hover:bg-[--btn-hover] py-[17.5px] px-[20px] md:h-[55px] flex items-center gap-2 justify-between`
