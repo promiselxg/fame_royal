@@ -10,8 +10,8 @@ import { ImageProvider } from "@/context/imageUpload.context";
 import { Toaster } from "@/components/ui/toaster";
 
 export const metadata = {
-  title: "Dashboard |  Rofad91 logistic services ltd",
-  description: "Rofad91 logistic services ltd",
+  title: "Dashboard |  Fame Royal Travels Ltd",
+  description: "Fame Royal Travels Ltd",
 };
 
 export const fetchCache = "force-no-store";
