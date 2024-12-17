@@ -40,7 +40,7 @@ export default function Home() {
           <div className="md:w-1/2 md:ml-[50px] flex flex-col justify-center gap-y-2  pt-[50px] md:pt-0">
             <h2
               className={cn(
-                `${work_sans.className} text-[16px] font-[600] text-[--light-yellow-text]`
+                `${work_sans.className} text-[25px] font-[600] text-[--light-yellow-text] leading-[1.2]`
               )}
             >
               About Fame Royal Travels
@@ -50,24 +50,23 @@ export default function Home() {
                 `${playfair.className} text-[20px] md:text-[45px] font-[900] leading-[1.2]`
               )}
             >
-              CEO Message
+              {/* CEO Message */}
             </h2>
             <p
               className={cn(
                 `${work_sans.className} text-sm md:text-[16px] font-[400] leading-6 text-[rgba(0,0,0,0.9)]`
               )}
             >
-              I am thrilled to welcome you to our world of exploration and
-              adventure. At Fame royal travels, we believe that travel is not
-              just about visiting new places; its about creating unforgettable
-              memories, forging connections, and boardening horizons. Our team
-              is dedicated to crafting unique experiences tailored to your
-              preferences, ensuring every journey with us is extraordinary.
-              Whether you’re seeking a relaxing beach getaway, an exhilarating
-              expedition, or a cultural immersion, we are here to turn your
-              travel dreams into reality. Thank you for entrusting us with your
-              adventures. We look forward to being a part of your unforgettable
-              journeys.
+              Welcome you to our world of exploration and adventure. At Fame
+              royal travels, we believe that travel is not just about visiting
+              new places; its about creating unforgettable memories, forging
+              connections, and boardening horizons. Our team is dedicated to
+              crafting unique experiences tailored to your preferences, ensuring
+              every journey with us is extraordinary. Whether you’re seeking a
+              relaxing beach getaway, an exhilarating expedition, or a cultural
+              immersion, we are here to turn your travel dreams into reality.
+              Thank you for entrusting us with your adventures. We look forward
+              to being a part of your unforgettable journeys.
             </p>
             {/* <Link href="/tour">
               <Button
